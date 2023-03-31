@@ -13,17 +13,18 @@ const ComponentLocales = {
 
 const ReadPrettyLocales = {
   'en-US': 'en',
-  'zh-CN': 'zh_CN'
+  'zh-CN': 'zh_CN',
 };
 
-type ComposedCron = React.FC<CronProps> & {}
+type ComposedCron = React.FC<CronProps> & {};
 
 export const Cron: ComposedCron = connect(
   (props: Exclude<CronProps, 'setValue'> & { onChange: (value: string) => void }) => {
     const { onChange, ...rest } = props;
     const locale = ComponentLocales[localStorage.getItem('NOCOBASE_LOCALE') || 'en-US'];
     return (
-      <fieldset className={css`
+      <fieldset
+        className={css`
         .react-js-cron{
           padding: .5em .5em 0 .5em;
           border: 1px dashed #ccc;
@@ -41,28 +42,23 @@ export const Cron: ComposedCron = connect(
               margin: 0 .5em 0 0;
             }
           }
-      `}>
-        <ReactCron
-          setValue={onChange}
-          locale={locale}
-          {...rest}
-        />
+      `}
+      >
+        <ReactCron setValue={onChange} locale={locale} {...rest} />
       </fieldset>
     );
   },
   mapReadPretty((props) => {
     const locale = ReadPrettyLocales[localStorage.getItem('NOCOBASE_LOCALE') || 'en-US'];
-    return props.value
-      ? (
-        <span>
-          {cronstrue.toString(props.value, {
-            locale,
-            use24HourTimeFormat: true
-          })}
-        </span>
-      )
-      : null;
-  })
+    return props.value ? (
+      <span>
+        {cronstrue.toString(props.value, {
+          locale,
+          use24HourTimeFormat: true,
+        })}
+      </span>
+    ) : null;
+  }),
 );
 
 export default Cron;

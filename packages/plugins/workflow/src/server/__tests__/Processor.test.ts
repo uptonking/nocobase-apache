@@ -3,8 +3,6 @@ import { Application } from '@nocobase/server';
 import { getApp, sleep } from '.';
 import { BRANCH_INDEX, EXECUTION_STATUS, JOB_STATUS } from '../constants';
 
-
-
 describe('workflow > Processor', () => {
   let app: Application;
   let db: Database;
@@ -26,8 +24,8 @@ describe('workflow > Processor', () => {
       type: 'collection',
       config: {
         mode: 1,
-        collection: 'posts'
-      }
+        collection: 'posts',
+      },
     });
   });
 
@@ -46,7 +44,7 @@ describe('workflow > Processor', () => {
 
     it('execute resolved workflow', async () => {
       await workflow.createNode({
-        type: 'echo'
+        type: 'echo',
       });
 
       const post = await PostRepo.create({ values: { title: 't1' } });
@@ -64,7 +62,7 @@ describe('workflow > Processor', () => {
 
     it('workflow with single simple node', async () => {
       await workflow.createNode({
-        type: 'echo'
+        type: 'echo',
       });
 
       const post = await PostRepo.create({ values: { title: 't1' } });
@@ -85,13 +83,13 @@ describe('workflow > Processor', () => {
     it('workflow with multiple simple nodes', async () => {
       const n1 = await workflow.createNode({
         title: 'echo 1',
-        type: 'echo'
+        type: 'echo',
       });
 
       const n2 = await workflow.createNode({
         title: 'echo 2',
         type: 'echo',
-        upstreamId: n1.id
+        upstreamId: n1.id,
       });
 
       await n1.setDownstream(n2);
@@ -113,7 +111,7 @@ describe('workflow > Processor', () => {
 
     it('workflow with error node', async () => {
       await workflow.createNode({
-        type: 'error'
+        type: 'error',
       });
 
       const post = await PostRepo.create({ values: { title: 't1' } });
@@ -139,7 +137,7 @@ describe('workflow > Processor', () => {
 
       const n2 = await workflow.createNode({
         type: 'echo',
-        upstreamId: n1.id
+        upstreamId: n1.id,
       });
 
       await n1.setDownstream(n2);
@@ -176,7 +174,7 @@ describe('workflow > Processor', () => {
       });
       const n2 = await workflow.createNode({
         type: 'echo',
-        upstreamId: n1.id
+        upstreamId: n1.id,
       });
       await n1.setDownstream(n2);
 
@@ -215,13 +213,13 @@ describe('workflow > Processor', () => {
       const n2 = await workflow.createNode({
         type: 'echo',
         branchIndex: BRANCH_INDEX.ON_TRUE,
-        upstreamId: n1.id
+        upstreamId: n1.id,
       });
 
       await workflow.createNode({
         type: 'echo',
         branchIndex: BRANCH_INDEX.ON_FALSE,
-        upstreamId: n1.id
+        upstreamId: n1.id,
       });
 
       const post = await PostRepo.create({ values: { title: 't1' } });
@@ -247,12 +245,12 @@ describe('workflow > Processor', () => {
       const n2 = await workflow.createNode({
         type: 'prompt',
         branchIndex: BRANCH_INDEX.ON_TRUE,
-        upstreamId: n1.id
+        upstreamId: n1.id,
       });
 
       const n3 = await workflow.createNode({
         type: 'echo',
-        upstreamId: n1.id
+        upstreamId: n1.id,
       });
 
       await n1.setDownstream(n3);
@@ -284,12 +282,12 @@ describe('workflow > Processor', () => {
       const n2 = await workflow.createNode({
         type: 'prompt->error',
         branchIndex: BRANCH_INDEX.ON_TRUE,
-        upstreamId: n1.id
+        upstreamId: n1.id,
       });
 
       const n3 = await workflow.createNode({
         type: 'echo',
-        upstreamId: n1.id
+        upstreamId: n1.id,
       });
 
       await n1.setDownstream(n3);
@@ -318,32 +316,32 @@ describe('workflow > Processor', () => {
   describe('branch: mixed', () => {
     it('condition branches contains parallel', async () => {
       const n1 = await workflow.createNode({
-        type: 'condition'
+        type: 'condition',
       });
 
       const n2 = await workflow.createNode({
         type: 'parallel',
         branchIndex: BRANCH_INDEX.ON_TRUE,
-        upstreamId: n1.id
+        upstreamId: n1.id,
       });
 
       const n3 = await workflow.createNode({
         type: 'prompt',
         upstreamId: n2.id,
-        branchIndex: 0
+        branchIndex: 0,
       });
 
       const n4 = await workflow.createNode({
         title: 'parallel echo',
         type: 'echo',
         upstreamId: n2.id,
-        branchIndex: 1
+        branchIndex: 1,
       });
 
       const n5 = await workflow.createNode({
         title: 'last echo',
         type: 'echo',
-        upstreamId: n1.id
+        upstreamId: n1.id,
       });
 
       await n1.setDownstream(n5);
@@ -358,7 +356,7 @@ describe('workflow > Processor', () => {
       const pendingJobs = await execution.getJobs();
       expect(pendingJobs.length).toBe(4);
 
-      const pending = pendingJobs.find(item => item.nodeId === n3.id );
+      const pending = pendingJobs.find((item) => item.nodeId === n3.id);
       pending.set('result', 123);
       pending.execution = execution;
       await plugin.resume(pending);
@@ -372,32 +370,32 @@ describe('workflow > Processor', () => {
 
     it('parallel branches contains condition', async () => {
       const n1 = await workflow.createNode({
-        type: 'parallel'
+        type: 'parallel',
       });
 
       const n2 = await workflow.createNode({
         type: 'prompt',
         upstreamId: n1.id,
-        branchIndex: 0
+        branchIndex: 0,
       });
 
       const n3 = await workflow.createNode({
         type: 'condition',
         upstreamId: n1.id,
-        branchIndex: 1
+        branchIndex: 1,
       });
 
       const n4 = await workflow.createNode({
         title: 'condition echo',
         type: 'echo',
         upstreamId: n3.id,
-        branchIndex: BRANCH_INDEX.ON_TRUE
+        branchIndex: BRANCH_INDEX.ON_TRUE,
       });
 
       const n5 = await workflow.createNode({
         title: 'last echo',
         type: 'echo',
-        upstreamId: n1.id
+        upstreamId: n1.id,
       });
 
       await n1.setDownstream(n5);
@@ -412,7 +410,7 @@ describe('workflow > Processor', () => {
       const pendingJobs = await e1.getJobs();
       expect(pendingJobs.length).toBe(4);
 
-      const pending = pendingJobs.find(item => item.nodeId === n2.id );
+      const pending = pendingJobs.find((item) => item.nodeId === n2.id);
       pending.set('result', 123);
       pending.execution = e1;
       await plugin.resume(pending);

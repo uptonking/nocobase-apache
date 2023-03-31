@@ -3,8 +3,6 @@ import Database from '@nocobase/database';
 import { getApp, sleep } from '..';
 import { EXECUTION_STATUS, BRANCH_INDEX } from '../../constants';
 
-
-
 describe('workflow > instructions > condition', () => {
   let app: Application;
   let db: Database;
@@ -25,20 +23,17 @@ describe('workflow > instructions > condition', () => {
       type: 'collection',
       config: {
         mode: 1,
-        collection: 'posts'
-      }
+        collection: 'posts',
+      },
     });
   });
 
   afterEach(() => db.close());
 
-  describe('config.rejectOnFalse', () => {
-
-  });
+  describe('config.rejectOnFalse', () => {});
 
   describe('single calculation', () => {
     it('calculation to true downstream', async () => {
-
       const n1 = await workflow.createNode({
         title: 'condition',
         type: 'condition',
@@ -46,23 +41,23 @@ describe('workflow > instructions > condition', () => {
           // (1 === 1): true
           calculation: {
             calculator: 'equal',
-            operands: [{ value: 1 }, { value: 1 }]
-          }
-        }
+            operands: [{ value: 1 }, { value: 1 }],
+          },
+        },
       });
 
       const n2 = await workflow.createNode({
         title: 'true to echo',
         type: 'echo',
         branchIndex: BRANCH_INDEX.ON_TRUE,
-        upstreamId: n1.id
+        upstreamId: n1.id,
       });
 
       const n3 = await workflow.createNode({
         title: 'false to echo',
         type: 'echo',
         branchIndex: BRANCH_INDEX.ON_FALSE,
-        upstreamId: n1.id
+        upstreamId: n1.id,
       });
 
       const post = await PostRepo.create({ values: { title: 't1' } });
@@ -85,23 +80,23 @@ describe('workflow > instructions > condition', () => {
           // (0 === 1): false
           calculation: {
             calculator: 'equal',
-            operands: [{ value: 0 }, { value: 1 }]
-          }
-        }
+            operands: [{ value: 0 }, { value: 1 }],
+          },
+        },
       });
 
       await workflow.createNode({
         title: 'true to echo',
         type: 'echo',
         branchIndex: BRANCH_INDEX.ON_TRUE,
-        upstreamId: n1.id
+        upstreamId: n1.id,
       });
 
       await workflow.createNode({
         title: 'false to echo',
         type: 'echo',
         branchIndex: BRANCH_INDEX.ON_FALSE,
-        upstreamId: n1.id
+        upstreamId: n1.id,
       });
 
       const post = await PostRepo.create({ values: { title: 't1' } });
@@ -116,9 +111,7 @@ describe('workflow > instructions > condition', () => {
       expect(jobs[1].result).toEqual(false);
     });
 
-    it('not', async () => {
-
-    });
+    it('not', async () => {});
   });
 
   describe('group calculation', () => {
@@ -132,16 +125,16 @@ describe('workflow > instructions > condition', () => {
               calculations: [
                 {
                   calculator: 'equal',
-                  operands: [{ value: 1 }, { value: 1 }]
+                  operands: [{ value: 1 }, { value: 1 }],
                 },
                 {
                   calculator: 'equal',
-                  operands: [{ value: 1 }, { value: 1 }]
-                }
-              ]
-            }
-          }
-        }
+                  operands: [{ value: 1 }, { value: 1 }],
+                },
+              ],
+            },
+          },
+        },
       });
 
       const post = await PostRepo.create({ values: { title: 't1' } });
@@ -163,16 +156,16 @@ describe('workflow > instructions > condition', () => {
               calculations: [
                 {
                   calculator: 'equal',
-                  operands: [{ value: 1 }, { value: 1 }]
+                  operands: [{ value: 1 }, { value: 1 }],
                 },
                 {
                   calculator: 'equal',
-                  operands: [{ value: 0 }, { value: 1 }]
-                }
-              ]
-            }
-          }
-        }
+                  operands: [{ value: 0 }, { value: 1 }],
+                },
+              ],
+            },
+          },
+        },
       });
 
       const post = await PostRepo.create({ values: { title: 't1' } });
@@ -194,16 +187,16 @@ describe('workflow > instructions > condition', () => {
               calculations: [
                 {
                   calculator: 'equal',
-                  operands: [{ value: 1 }, { value: 1 }]
+                  operands: [{ value: 1 }, { value: 1 }],
                 },
                 {
                   calculator: 'equal',
-                  operands: [{ value: 0 }, { value: 1 }]
-                }
-              ]
-            }
-          }
-        }
+                  operands: [{ value: 0 }, { value: 1 }],
+                },
+              ],
+            },
+          },
+        },
       });
 
       const post = await PostRepo.create({ values: { title: 't1' } });
@@ -225,16 +218,16 @@ describe('workflow > instructions > condition', () => {
               calculations: [
                 {
                   calculator: 'equal',
-                  operands: [{ value: 0 }, { value: 1 }]
+                  operands: [{ value: 0 }, { value: 1 }],
                 },
                 {
                   calculator: 'equal',
-                  operands: [{ value: 0 }, { value: 1 }]
-                }
-              ]
-            }
-          }
-        }
+                  operands: [{ value: 0 }, { value: 1 }],
+                },
+              ],
+            },
+          },
+        },
       });
 
       const post = await PostRepo.create({ values: { title: 't1' } });
@@ -256,21 +249,21 @@ describe('workflow > instructions > condition', () => {
               calculations: [
                 {
                   calculator: 'equal',
-                  operands: [{ value: 1 }, { value: 1 }]
+                  operands: [{ value: 1 }, { value: 1 }],
                 },
                 {
                   group: {
                     type: 'or',
                     calculations: [
                       { calculator: 'equal', operands: [{ value: 0 }, { value: 1 }] },
-                      { calculator: 'equal', operands: [{ value: 0 }, { value: 1 }] }
-                    ]
-                  }
-                }
-              ]
-            }
-          }
-        }
+                      { calculator: 'equal', operands: [{ value: 0 }, { value: 1 }] },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+        },
       });
 
       const post = await PostRepo.create({ values: { title: 't1' } });

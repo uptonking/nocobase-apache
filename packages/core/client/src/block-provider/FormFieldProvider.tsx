@@ -12,11 +12,11 @@ export const FormFieldContext = createContext<any>({});
 const InternalFormFieldProvider = (props) => {
   const { action, readPretty, fieldName } = props;
   const formBlockCtx = useFormBlockContext();
-  
+
   if (!formBlockCtx?.updateAssociationValues?.includes(fieldName)) {
     formBlockCtx?.updateAssociationValues?.push(fieldName);
   }
-  
+
   const field = useField();
 
   const form = useMemo(
@@ -54,9 +54,8 @@ const InternalFormFieldProvider = (props) => {
         {props.children}
       </FormFieldContext.Provider>
     </RecordProvider>
-    
   );
-}
+};
 
 export const WithoutFormFieldResource = createContext(null);
 
@@ -68,8 +67,8 @@ export const FormFieldProvider = (props) => {
         <InternalFormFieldProvider {...props} />
       </BlockProvider>
     </WithoutFormFieldResource.Provider>
-  )
-}
+  );
+};
 
 export const useFormFieldContext = () => {
   return useContext(FormFieldContext);
@@ -83,5 +82,4 @@ export const useFormFieldProps = () => {
   return {
     form: ctx.form,
   };
-
-}
+};

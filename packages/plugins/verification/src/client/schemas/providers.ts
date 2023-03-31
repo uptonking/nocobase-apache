@@ -14,7 +14,7 @@ const collection = {
         type: 'string',
         'x-component': 'Input',
         required: true,
-      }
+      },
     },
     {
       type: 'string',
@@ -25,7 +25,7 @@ const collection = {
         type: 'string',
         'x-component': 'Input',
         required: true,
-      }
+      },
     },
     {
       type: 'string',
@@ -36,9 +36,7 @@ const collection = {
         type: 'string',
         'x-component': 'Select',
         required: true,
-        enum: [
-          { label: `{{t("Aliyun SMS", { ns: "${NAMESPACE}" })}}`, value: 'sms-aliyun' },
-        ],
+        enum: [{ label: `{{t("Aliyun SMS", { ns: "${NAMESPACE}" })}}`, value: 'sms-aliyun' }],
       },
     },
     {
@@ -49,9 +47,9 @@ const collection = {
         title: '{{t("Default")}}',
         type: 'boolean',
         'x-component': 'Checkbox',
-      }
-    }
-  ]
+      },
+    },
+  ],
 };
 
 export default {
@@ -128,7 +126,8 @@ export default {
                 id: {
                   'x-component': 'CollectionField',
                   'x-decorator': 'FormItem',
-                  description: '{{t("Identifier for program usage. Support letters, numbers and underscores, must start with an letter.")}}',
+                  description:
+                    '{{t("Identifier for program usage. Support letters, numbers and underscores, must start with an letter.")}}',
                 },
                 title: {
                   'x-component': 'CollectionField',
@@ -230,8 +229,8 @@ export default {
               type: 'boolean',
               'x-component': 'CollectionField',
               'x-read-pretty': true,
-            }
-          }
+            },
+          },
         },
         actions: {
           type: 'void',

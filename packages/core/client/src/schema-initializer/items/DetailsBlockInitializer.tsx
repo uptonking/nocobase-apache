@@ -1,9 +1,9 @@
-import React from "react";
+import React from 'react';
 import { TableOutlined } from '@ant-design/icons';
 
-import { useCollectionManager } from "../../collection-manager";
-import { createDetailsBlockSchema } from "../utils";
-import { DataBlockInitializer } from "./DataBlockInitializer";
+import { useCollectionManager } from '../../collection-manager';
+import { createDetailsBlockSchema } from '../utils';
+import { DataBlockInitializer } from './DataBlockInitializer';
 
 export const DetailsBlockInitializer = (props) => {
   const { insert } = props;

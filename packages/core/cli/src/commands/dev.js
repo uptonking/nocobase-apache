@@ -9,6 +9,7 @@ const { getPortPromise } = require('portfinder');
  */
 module.exports = (cli) => {
   const { APP_PACKAGE_ROOT } = process.env;
+  console.log(';; APP_PACKAGE_ROOT-port ', APP_PACKAGE_ROOT, process.env.APP_PORT);
   cli
     .command('dev')
     .option('-p, --port [port]')

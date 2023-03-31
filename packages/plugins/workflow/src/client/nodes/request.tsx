@@ -3,8 +3,6 @@ import { ArrayItems } from '@formily/antd';
 import React from 'react';
 import EjsTextArea from '../components/EjsTextArea';
 
-
-
 export default {
   title: `{{t("HTTP request", { ns: "${NAMESPACE}" })}}`,
   type: 'request',
@@ -123,7 +121,6 @@ export default {
         placeholder: `{{t("Input request data", { ns: "${NAMESPACE}" })}}`,
         description: `{{t("You can use the above available variables in request data.", { ns: "${NAMESPACE}" })}}`,
       },
-
     },
     'config.ignoreFail': {
       type: 'boolean',
@@ -131,7 +128,7 @@ export default {
       title: `{{t("Ignore fail request and continue workflow", { ns: "${NAMESPACE}" })}}`,
       'x-decorator': 'FormItem',
       'x-component': 'Checkbox',
-    }
+    },
   },
   view: {},
   scope: {},

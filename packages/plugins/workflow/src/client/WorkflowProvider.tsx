@@ -27,12 +27,12 @@ function WorkflowPane() {
           WorkflowLink,
           ExecutionResourceProvider,
           ExecutionLink,
-          OpenDrawer
+          OpenDrawer,
         }}
       />
     </Card>
   );
-};
+}
 
 export const WorkflowProvider = (props) => {
   const ctx = useContext(PluginManagerContext);

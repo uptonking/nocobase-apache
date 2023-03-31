@@ -3,10 +3,8 @@ import compose from 'koa-compose';
 import { Context, utils } from '@nocobase/actions';
 
 import Plugin from '..';
-import { JOB_STATUS } from "../constants";
+import { JOB_STATUS } from '../constants';
 import { Instruction } from '.';
-
-
 
 export interface PromptConfig {
   fields: [];
@@ -20,7 +18,7 @@ async function loadJob(context: Context, next) {
     const job = await jobRepo.findOne({
       filterByTk,
       appends: ['node', 'execution'],
-      context
+      context,
     });
 
     if (!filterByTk || !job) {
@@ -32,9 +30,7 @@ async function loadJob(context: Context, next) {
   }
 
   const { type, config } = context.body.node;
-  if (type === 'prompt'
-    && config.actions
-    && !config.actions[values.status]) {
+  if (type === 'prompt' && config.actions && !config.actions[values.status]) {
     return context.throw(400);
   }
 
@@ -50,8 +46,9 @@ export default class implements Instruction {
 
   middleware = async (context: Context, next) => {
     const { actionName, resourceName } = context.action;
-    if (actionName === 'submit'
-      && resourceName === 'jobs'
+    if (
+      actionName === 'submit' &&
+      resourceName === 'jobs'
       // && this.middlewares.length
     ) {
       return compose([loadJob, ...this.middlewares])(context, next);
@@ -65,7 +62,7 @@ export default class implements Instruction {
 
   run(node, input, processor) {
     return {
-      status: JOB_STATUS.PENDING
+      status: JOB_STATUS.PENDING,
     };
   }
 
@@ -79,4 +76,4 @@ export default class implements Instruction {
   extend(options: Instruction) {
     Object.assign(this, options);
   }
-};
+}

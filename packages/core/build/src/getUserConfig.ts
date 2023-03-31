@@ -30,16 +30,16 @@ const CLASSES = {
 };
 const extendAjv = (ajv: AJV.Ajv) => {
   ajv.addKeyword('instanceof', {
-    compile: function(schema: string) {
+    compile: function (schema: string) {
       var Class = CLASSES[schema];
-      return function(data: any) {
+      return function (data: any) {
         return data instanceof Class;
       };
     },
   });
   return ajv;
 };
-export default function({ cwd, customPath }: { cwd: string; customPath?: string }): IBundleOptions {
+export default function ({ cwd, customPath }: { cwd: string; customPath?: string }): IBundleOptions {
   let finalPath = '';
 
   if (customPath) {
@@ -76,7 +76,7 @@ export default function({ cwd, customPath }: { cwd: string; customPath?: string 
 Invalid options in ${slash(relative(cwd, configFile))}
 
 ${errors.join('\n')}
-`.trim()
+`.trim(),
         );
       }
     });

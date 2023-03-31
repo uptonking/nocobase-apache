@@ -4,7 +4,7 @@ import { useField } from '@formily/react';
 import { Input } from 'antd';
 import { TextAreaProps } from 'antd/lib/input';
 
-export function Json({ value, onChange, space = 2, ...props }: TextAreaProps & { value: any, space: number }) {
+export function Json({ value, onChange, space = 2, ...props }: TextAreaProps & { value: any; space: number }) {
   const field = useField<Field>();
   return (
     <Input.TextArea

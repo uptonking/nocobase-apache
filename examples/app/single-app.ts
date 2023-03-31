@@ -13,6 +13,7 @@ import { Application } from '@nocobase/server';
 import { uid } from '@nocobase/utils';
 
 const app = new Application({
+  acl: false,
   database: {
     logging: process.env.DB_LOGGING === 'on' ? console.log : false,
     dialect: process.env.DB_DIALECT as any,

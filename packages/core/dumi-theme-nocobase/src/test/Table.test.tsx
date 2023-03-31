@@ -29,7 +29,7 @@ describe('test Table', () => {
     fireEvent(content, new Event('scroll'));
 
     // wait for throttle
-    await act(() => new Promise(resolve => setTimeout(resolve, 200)));
+    await act(() => new Promise((resolve) => setTimeout(resolve, 200)));
 
     // expect content be rendered
     expect(queryByText(text)).not.toBeNull();

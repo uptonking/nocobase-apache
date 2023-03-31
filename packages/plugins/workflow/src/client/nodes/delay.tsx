@@ -1,5 +1,5 @@
-import Duration from "../components/Duration";
-import { NAMESPACE } from "../locale";
+import Duration from '../components/Duration';
+import { NAMESPACE } from '../locale';
 
 export default {
   title: `{{t("Delay", { ns: "${NAMESPACE}" })}}`,
@@ -12,7 +12,7 @@ export default {
       title: `{{t("Duration", { ns: "${NAMESPACE}" })}}`,
       'x-decorator': 'FormItem',
       'x-component': 'Duration',
-      default: 60000
+      default: 60000,
     },
     'config.endStatus': {
       type: 'number',
@@ -26,15 +26,12 @@ export default {
       enum: [
         { label: `{{t("Succeed and continue", { ns: "${NAMESPACE}" })}}`, value: 1 },
         { label: `{{t("Fail and exit", { ns: "${NAMESPACE}" })}}`, value: -1 },
-      ]
-    }
+      ],
+    },
   },
-  view: {
-
-  },
-  scope: {
-  },
+  view: {},
+  scope: {},
   components: {
-    Duration
-  }
+    Duration,
+  },
 };

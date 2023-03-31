@@ -1,6 +1,6 @@
 import 'bar';
 
-function foo () {
+function foo() {
   return 'foo';
 }
 

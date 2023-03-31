@@ -25,7 +25,11 @@ export const FormDesigner = () => {
     <GeneralSchemaDesigner template={template} title={title || name}>
       {/* <SchemaSettings.Template componentName={'FormItem'} collectionName={name} /> */}
       <SchemaSettings.BlockTitleItem />
-      <SchemaSettings.FormItemTemplate componentName={'FormItem'} collectionName={name} resourceName={defaultResource} />
+      <SchemaSettings.FormItemTemplate
+        componentName={'FormItem'}
+        collectionName={name}
+        resourceName={defaultResource}
+      />
       <SchemaSettings.Divider />
       <SchemaSettings.Remove
         removeParentsIfNoChildren

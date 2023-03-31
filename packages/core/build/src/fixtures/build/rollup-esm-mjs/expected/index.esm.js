@@ -1,6 +1,5 @@
 import 'bar';
 
-function index () {
-}
+function index() {}
 
 export default index;

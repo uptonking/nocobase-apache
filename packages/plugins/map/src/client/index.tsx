@@ -2,7 +2,7 @@ import {
   CollectionManagerContext,
   CurrentAppInfoProvider,
   SchemaComponentOptions,
-  SettingsCenterProvider
+  SettingsCenterProvider,
 } from '@nocobase/client';
 import React, { useContext } from 'react';
 import Configuration from './components/Configuration';

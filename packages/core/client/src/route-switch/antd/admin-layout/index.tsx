@@ -18,7 +18,7 @@ import {
   useRequest,
   useRoute,
   useSystemSettings,
-} from '../../../';
+} from '@nocobase/client';
 import { useCollectionManager } from '../../../collection-manager';
 import { PoweredBy } from '../../../powered-by';
 import { useMutationObserver } from 'ahooks';

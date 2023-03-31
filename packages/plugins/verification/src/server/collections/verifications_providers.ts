@@ -4,7 +4,7 @@ export default {
     {
       type: 'string',
       name: 'id',
-      primaryKey: true
+      primaryKey: true,
     },
     {
       type: 'string',
@@ -12,15 +12,15 @@ export default {
     },
     {
       type: 'string',
-      name: 'type'
+      name: 'type',
     },
     {
       type: 'jsonb',
-      name: 'options'
+      name: 'options',
     },
     {
       type: 'radio',
-      name: 'default'
-    }
-  ]
+      name: 'default',
+    },
+  ],
 };

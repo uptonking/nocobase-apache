@@ -1,19 +1,19 @@
 export default {
-  'Workflow': '工作流',
+  Workflow: '工作流',
   'Execution history': '执行历史',
-  'Executed': '已执行',
+  Executed: '已执行',
   'Trigger type': '触发方式',
-  'Status': '状态',
-  'On': '启用',
-  'Off': '停用',
-  'Version': '版本',
+  Status: '状态',
+  On: '启用',
+  Off: '停用',
+  Version: '版本',
   'Copy to new version': '复制到新版本',
-  'Duplicate': '复制',
+  Duplicate: '复制',
 
-  'Loading': '加载中',
+  Loading: '加载中',
   'Load failed': '加载失败',
 
-  'Trigger': '触发器',
+  Trigger: '触发器',
   'Trigger variables': '触发器变量',
   'Trigger data': '触发数据',
   'Trigger time': '触发时间',
@@ -25,7 +25,8 @@ export default {
   'After record added or updated': '新增或更新数据后',
   'After record deleted': '删除数据后',
   'Changed fields': '发生变动的字段',
-  'Triggered only if one of the selected fields changes. If unselected, it means that it will be triggered when any field changes. When record is added or deleted, any field is considered to have been changed.': '只有被选中的某个字段发生变动时才会触发。如果不选择，则表示任何字段变动时都会触发。新增或删除数据时，任意字段都被认为发生变动。',
+  'Triggered only if one of the selected fields changes. If unselected, it means that it will be triggered when any field changes. When record is added or deleted, any field is considered to have been changed.':
+    '只有被选中的某个字段发生变动时才会触发。如果不选择，则表示任何字段变动时都会触发。新增或删除数据时，任意字段都被认为发生变动。',
   'Only triggers when match conditions': '满足以下条件才触发',
 
   'Schedule event': '定时任务',
@@ -39,15 +40,15 @@ export default {
   'Repeat mode': '重复模式',
   'Repeat limit': '重复次数',
   'No limit': '不限',
-  'Seconds': '秒',
-  'Minutes': '分钟',
-  'Hours': '小时',
-  'Days': '天',
-  'Weeks': '周',
-  'Months': '月',
+  Seconds: '秒',
+  Minutes: '分钟',
+  Hours: '小时',
+  Days: '天',
+  Weeks: '周',
+  Months: '月',
 
   'No repeat': '不重复',
-  'Every': '每',
+  Every: '每',
 
   'By minute': '按分钟',
   'By hour': '按小时',
@@ -58,50 +59,51 @@ export default {
   'By field': '数据表字段',
   'By custom date': '自定义时间',
 
-  'Advanced': '高级模式',
+  Advanced: '高级模式',
 
-  'End': '结束',
+  End: '结束',
 
   'Node result': '节点数据',
-  'Constant': '常量',
+  Constant: '常量',
 
-  'Null': '空值',
-  'Boolean': '逻辑值',
-  'String': '字符串',
+  Null: '空值',
+  Boolean: '逻辑值',
+  String: '字符串',
 
-  'Calculator': '运算',
+  Calculator: '运算',
   'Arithmetic calculation': '算术运算',
   'String operation': '字符串',
 
   'Executed at': '执行于',
 
-  'Queueing': '队列中',
+  Queueing: '队列中',
   'On going': '进行中',
-  'Succeeded': '成功',
-  'Failed': '失败',
-  'Pending': '等待处理',
-  'Canceled': '已取消',
+  Succeeded: '成功',
+  Failed: '失败',
+  Pending: '等待处理',
+  Canceled: '已取消',
 
-  'This node contains branches, deleting will also be preformed to them, are you sure?': '节点包含分支，将同时删除其所有分支下的子节点，确定继续？',
+  'This node contains branches, deleting will also be preformed to them, are you sure?':
+    '节点包含分支，将同时删除其所有分支下的子节点，确定继续？',
 
-  'Control': '流程控制',
+  Control: '流程控制',
   'Collection operations': '数据表操作',
   'Extended types': '扩展类型',
 
   'Node type': '节点类型',
 
-  'Calculation': '运算',
+  Calculation: '运算',
   'Configure calculation': '配置运算',
   'Calculation result': '运算结果',
-  'True': '真',
-  'False': '假',
-  'concat': '连接',
+  True: '真',
+  False: '假',
+  concat: '连接',
 
-  'Condition': '条件判断',
-  'Mode': '模式',
+  Condition: '条件判断',
+  Mode: '模式',
   'Continue when "Yes"': '“是”则继续',
   'Branch into "Yes" and "No"': '“是”和“否”分别继续',
-  'Conditions': '条件配置',
+  Conditions: '条件配置',
 
   'Parallel branch': '分支',
   'Add branch': '增加分支',
@@ -112,8 +114,8 @@ export default {
   'Continue after any branch succeeded': '任意分支成功后就继续',
   'Continue after any branch succeeded, or exit after any branch failed': '任意分支成功继续，或失败后退出',
 
-  'Delay': '延时',
-  'Duration': '时长',
+  Delay: '延时',
+  Duration: '时长',
   'End Status': '到时状态',
   'Select status': '选择状态',
   'Succeed and continue': '通过并继续',
@@ -125,14 +127,16 @@ export default {
   'Multiple records': '多条数据',
   'Please select collection first': '请先选择数据表',
   'Only update records matching conditions': '只更新满足条件的数据',
-  'Fields that are not assigned a value will be set to the default value, and those that do not have a default value are set to null.': '未被赋值的字段将被设置为默认值，没有默认值的设置为空值。',
+  'Fields that are not assigned a value will be set to the default value, and those that do not have a default value are set to null.':
+    '未被赋值的字段将被设置为默认值，没有默认值的设置为空值。',
   'Trigger in executed workflow cannot be modified': '已经执行过工作流的触发器不能被修改',
   'Node in executed workflow cannot be modified': '已经执行过工作流中的节点不能被修改',
   'Can not delete': '无法删除',
-  'The result of this node has been referenced by other nodes ({{nodes}}), please remove the usage before deleting.': '该节点的执行结果已被其他节点（{{nodes}}）引用，删除前请先移除引用。',
+  'The result of this node has been referenced by other nodes ({{nodes}}), please remove the usage before deleting.':
+    '该节点的执行结果已被其他节点（{{nodes}}）引用，删除前请先移除引用。',
 
   'HTTP request': 'HTTP 请求',
-  'URL': '地址',
+  URL: '地址',
   'You can use the above available variables in URL.': '您可以在地址中使用使用上面的可用变量。',
   'Request headers': '请求头',
   'Name(e.g. Content-Type)': '名称(例如 Content-Type)',
@@ -147,5 +151,5 @@ export default {
   'Default headers is Content-Type: application/json': '默认请求头是 Content-Type: application/json',
   'Ignore fail request and continue workflow': '忽略失败请求并继续工作流',
   'Syntax see': '语法参考',
-  'Show available variable tool':'显示可用变量工具'
+  'Show available variable tool': '显示可用变量工具',
 };

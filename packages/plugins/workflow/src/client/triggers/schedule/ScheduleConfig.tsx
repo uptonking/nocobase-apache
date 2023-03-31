@@ -21,9 +21,9 @@ const ModeFieldsets = {
       'x-decorator': 'FormItem',
       'x-component': 'DatePicker',
       'x-component-props': {
-        showTime: true
+        showTime: true,
       },
-      required: true
+      required: true,
     },
     repeat: {
       type: 'string',
@@ -38,7 +38,7 @@ const ModeFieldsets = {
             state: {
               visible: '{{!!$self.value}}',
             },
-          }
+          },
         },
         {
           target: 'config.limit',
@@ -46,9 +46,9 @@ const ModeFieldsets = {
             state: {
               visible: '{{!!$self.value}}',
             },
-          }
-        }
-      ]
+          },
+        },
+      ],
     },
     endsOn: {
       type: 'datetime',
@@ -57,8 +57,8 @@ const ModeFieldsets = {
       'x-decorator': 'FormItem',
       'x-component': 'DatePicker',
       'x-component-props': {
-        showTime: true
-      }
+        showTime: true,
+      },
     },
     limit: {
       type: 'number',
@@ -68,9 +68,9 @@ const ModeFieldsets = {
       'x-component': 'InputNumber',
       'x-component-props': {
         placeholder: `{{t("No limit", { ns: "${NAMESPACE}" })}}`,
-        min: 0
-      }
-    }
+        min: 0,
+      },
+    },
   },
   [SCHEDULE_MODE.COLLECTION_FIELD]: {
     collection: {
@@ -84,9 +84,9 @@ const ModeFieldsets = {
             state: {
               visible: '{{!!$self.value}}',
             },
-          }
-        }
-      ]
+          },
+        },
+      ],
     },
     startsOn: {
       type: 'object',
@@ -100,10 +100,10 @@ const ModeFieldsets = {
             state: {
               visible: '{{!!$self.value}}',
             },
-          }
-        }
+          },
+        },
       ],
-      required: true
+      required: true,
     },
     repeat: {
       type: 'string',
@@ -118,7 +118,7 @@ const ModeFieldsets = {
             state: {
               visible: '{{!!$self.value}}',
             },
-          }
+          },
         },
         {
           target: 'config.limit',
@@ -126,15 +126,15 @@ const ModeFieldsets = {
             state: {
               visible: '{{!!$self.value}}',
             },
-          }
-        }
-      ]
+          },
+        },
+      ],
     },
     endsOn: {
       type: 'object',
       title: `{{t("Ends on", { ns: "${NAMESPACE}" })}}`,
       'x-decorator': 'FormItem',
-      'x-component': 'EndsByField'
+      'x-component': 'EndsByField',
     },
     limit: {
       type: 'number',
@@ -144,15 +144,18 @@ const ModeFieldsets = {
       'x-component': 'InputNumber',
       'x-component-props': {
         placeholder: `{{t("No limit", { ns: "${NAMESPACE}" })}}`,
-        min: 0
-      }
-    }
-  }
+        min: 0,
+      },
+    },
+  },
 };
 
 const scheduleModeOptions = [
   { value: SCHEDULE_MODE.STATIC, label: `{{t("Based on certain date", { ns: "${NAMESPACE}" })}}` },
-  { value: SCHEDULE_MODE.COLLECTION_FIELD, label: `{{t("Based on date field of collection", { ns: "${NAMESPACE}" })}}` },
+  {
+    value: SCHEDULE_MODE.COLLECTION_FIELD,
+    label: `{{t("Based on date field of collection", { ns: "${NAMESPACE}" })}}`,
+  },
 ];
 
 export const ScheduleConfig = () => {
@@ -180,9 +183,9 @@ export const ScheduleConfig = () => {
           'x-decorator': 'FormItem',
           'x-component': 'Radio.Group',
           'x-component-props': {
-            options: scheduleModeOptions
+            options: scheduleModeOptions,
           },
-          required: true
+          required: true,
         }}
       />
       <SchemaComponent
@@ -194,23 +197,23 @@ export const ScheduleConfig = () => {
               'x-component': 'fieldset',
               'x-component-props': {
                 className: css`
-                  .ant-input-number{
+                  .ant-input-number {
                     width: 4em;
                   }
 
-                  .ant-picker{
+                  .ant-picker {
                     width: auto;
                   }
-                `
+                `,
               },
-              properties: ModeFieldsets[mode]
-            }
-          }
+              properties: ModeFieldsets[mode],
+            },
+          },
         }}
         components={{
           OnField,
           RepeatField,
-          EndsByField
+          EndsByField,
         }}
       />
     </>

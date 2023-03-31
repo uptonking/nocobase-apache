@@ -1,4 +1,3 @@
-
 // babel-plugin-react-require
 export const Foo = () => <div />;
 
@@ -19,14 +18,13 @@ export a from './a';
 
 // do expression
 let a = do {
-  if(x > 10) {
-    'big';
+  if (x > 10) {
+    ('big');
   } else {
-    'small';
+    ('small');
   }
 };
 console.log(a);
 
 // export namespace from
 export * as b from './b';
-

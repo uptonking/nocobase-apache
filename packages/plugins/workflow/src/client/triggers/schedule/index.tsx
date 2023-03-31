@@ -17,25 +17,22 @@ export default {
       type: 'object',
       name: 'config',
       'x-component': 'ScheduleConfig',
-      'x-component-props': {
-      }
-    }
+      'x-component-props': {},
+    },
   },
   scope: {
-    useCollectionDataSource
+    useCollectionDataSource,
   },
   components: {
-    ScheduleConfig
+    ScheduleConfig,
   },
   getOptions(config) {
     const { t } = useWorkflowTranslation();
-    const options: any[] = [
-      { value: 'date', label: t('Trigger time') },
-    ];
+    const options: any[] = [{ value: 'date', label: t('Trigger time') }];
     if (config.mode === SCHEDULE_MODE.COLLECTION_FIELD) {
       options.push({
         value: 'data',
-        label: t('Trigger data')
+        label: t('Trigger data'),
       });
     }
     return options;
@@ -50,14 +47,14 @@ export default {
     if (!options.type || options.type === 'date') {
       return null;
     }
-    const collection = collections.find(item => item.name === workflow.config.collection) ?? { fields: [] };
+    const collection = collections.find((item) => item.name === workflow.config.collection) ?? { fields: [] };
     return (
       <Cascader
         placeholder={t('Trigger data')}
         value={path}
         options={collection.fields
-          .filter(field => BaseTypeSet.has(field?.uiSchema?.type))
-          .map(field => ({
+          .filter((field) => BaseTypeSet.has(field?.uiSchema?.type))
+          .map((field) => ({
             value: field.name,
             label: compile(field.uiSchema?.title),
           }))}
@@ -67,5 +64,5 @@ export default {
         allowClear={false}
       />
     );
-  }
+  },
 };

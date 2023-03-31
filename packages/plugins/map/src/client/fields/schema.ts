@@ -41,17 +41,17 @@ export const commonSchema = {
       },
       'x-disabled': '{{ isOverride || !createOnly }}',
       default: 'amap',
-      enum: MapTypes
-    }
+      enum: MapTypes,
+    },
   },
   schemaInitialize(schema: ISchema, { readPretty, block }) {
     if (block === 'Form') {
       Object.assign(schema, {
         'x-component-props': {
-          readOnly: readPretty ? true : false
+          readOnly: readPretty ? true : false,
         },
         'x-designer': 'Map.Designer',
       });
     }
   },
-}
+};

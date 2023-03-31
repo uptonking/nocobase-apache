@@ -1,12 +1,6 @@
-
 export default {
-  entry: [
-    'src/index.js',
-    'src/foo.js',
-    'src/bar.js',
-  ],
-  umd: {
-  },
+  entry: ['src/index.js', 'src/foo.js', 'src/bar.js'],
+  umd: {},
   cjs: { type: 'rollup' },
   esm: { type: 'rollup' },
   file: 'dva',

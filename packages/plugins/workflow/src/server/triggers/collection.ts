@@ -1,6 +1,6 @@
-import { Collection, Model } from "@nocobase/database";
-import { Trigger } from "..";
-import WorkflowModel from "../models/Workflow";
+import { Collection, Model } from '@nocobase/database';
+import { Trigger } from '..';
+import WorkflowModel from '../models/Workflow';
 
 export interface CollectionChangeTriggerConfig {
   collection: string;
@@ -12,15 +12,13 @@ export interface CollectionChangeTriggerConfig {
 const MODE_BITMAP = {
   CREATE: 1,
   UPDATE: 2,
-  DESTROY: 4
+  DESTROY: 4,
 };
 
 const MODE_BITMAP_EVENTS = new Map();
 MODE_BITMAP_EVENTS.set(MODE_BITMAP.CREATE, 'afterCreateWithAssociations');
 MODE_BITMAP_EVENTS.set(MODE_BITMAP.UPDATE, 'afterUpdateWithAssociations');
 MODE_BITMAP_EVENTS.set(MODE_BITMAP.DESTROY, 'afterDestroy');
-
-
 
 function getHookId(workflow, type) {
   return `${type}#${workflow.id}`;
@@ -41,11 +39,12 @@ async function handler(this: CollectionTrigger, workflow: WorkflowModel, data: M
   const { transaction, context } = options;
 
   // NOTE: if no configured fields changed, do not trigger
-  if (changed
-    && changed.length
-    && changed
-      .filter(name => !['linkTo', 'hasOne', 'hasMany', 'belongsToMany'].includes(collection.getField(name).type))
-      .every(name => !data.changedWithAssociations(getFieldRawName(collection, name)))
+  if (
+    changed &&
+    changed.length &&
+    changed
+      .filter((name) => !['linkTo', 'hasOne', 'hasMany', 'belongsToMany'].includes(collection.getField(name).type))
+      .every((name) => !data.changedWithAssociations(getFieldRawName(collection, name)))
   ) {
     return;
   }
@@ -56,13 +55,10 @@ async function handler(this: CollectionTrigger, workflow: WorkflowModel, data: M
     const { repository, model } = collection;
     const count = await repository.count({
       filter: {
-        $and: [
-          condition,
-          { [model.primaryKeyAttribute]: data[model.primaryKeyAttribute] }
-        ]
+        $and: [condition, { [model.primaryKeyAttribute]: data[model.primaryKeyAttribute] }],
       },
       context,
-      transaction
+      transaction,
     });
 
     if (!count) {
@@ -70,9 +66,13 @@ async function handler(this: CollectionTrigger, workflow: WorkflowModel, data: M
     }
   }
 
-  this.plugin.trigger(workflow, { data: data.get() }, {
-    context
-  });
+  this.plugin.trigger(
+    workflow,
+    { data: data.get() },
+    {
+      context,
+    },
+  );
 }
 
 export default class CollectionTrigger extends Trigger {

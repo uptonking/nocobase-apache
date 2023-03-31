@@ -1,5 +1,5 @@
-import { CollectionOptions } from "@nocobase/client";
-import { MapConfigurationCollectionName } from "../constants";
+import { CollectionOptions } from '@nocobase/client';
+import { MapConfigurationCollectionName } from '../constants';
 
 export default {
   name: MapConfigurationCollectionName,
@@ -9,19 +9,19 @@ export default {
       title: 'Access key',
       comment: '访问密钥',
       name: 'accessKey',
-      type: 'string'
+      type: 'string',
     },
     {
       title: 'securityJsCode',
       comment: 'securityJsCode or serviceHOST',
       name: 'securityJsCode',
-      type: 'string'
+      type: 'string',
     },
     {
       title: 'Map type',
       comment: '地图类型',
       name: 'type',
       type: 'string',
-    }
-  ]
-} as CollectionOptions
+    },
+  ],
+} as CollectionOptions;

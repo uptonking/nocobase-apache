@@ -4,7 +4,7 @@ import React, { useCallback, useContext } from 'react';
 import { css } from '@emotion/css';
 import { useTranslation } from 'react-i18next';
 import { Link, useHistory, useLocation } from 'react-router-dom';
-import { SchemaComponent, useAPIClient, useCurrentDocumentTitle, useSystemSettings } from '..';
+import { SchemaComponent, useAPIClient, useCurrentDocumentTitle, useSystemSettings } from '@nocobase/client';
 import { useSigninPageExtension } from './SigninPageExtension';
 import VerificationCode from './VerificationCode';
 

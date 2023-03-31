@@ -9,9 +9,9 @@ export const Percent = connect(
     const { value, onChange } = props;
 
     return (
-      <InputNumber 
+      <InputNumber
         {...props}
-        addonAfter="%" 
+        addonAfter="%"
         value={value ? math.round(value * 100, 9) : null}
         onChange={(v: any) => {
           if (onChange) {
@@ -22,6 +22,6 @@ export const Percent = connect(
     );
   },
   mapReadPretty((props) => {
-    return (<ReadPretty {...props} value={props.value ? math.round(props.value * 100, 9) : null} />);
+    return <ReadPretty {...props} value={props.value ? math.round(props.value * 100, 9) : null} />;
   }),
 );

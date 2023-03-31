@@ -1,19 +1,25 @@
-import { css, cx } from "@emotion/css";
-import { ISchema, useForm } from "@formily/react";
-import { Registry } from "@nocobase/utils/client";
-import { message, Tag } from "antd";
-import React from "react";
-import { useTranslation } from "react-i18next";
+import { css, cx } from '@emotion/css';
+import { ISchema, useForm } from '@formily/react';
+import { Registry } from '@nocobase/utils/client';
+import { message, Tag } from 'antd';
+import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { InfoOutlined } from '@ant-design/icons';
 
-import { SchemaComponent, useActionContext, useAPIClient, useCompile, useRequest, useResourceActionContext } from '@nocobase/client';
+import {
+  SchemaComponent,
+  useActionContext,
+  useAPIClient,
+  useCompile,
+  useRequest,
+  useResourceActionContext,
+} from '@nocobase/client';
 
-import { nodeCardClass, nodeHeaderClass, nodeMetaClass, nodeTitleClass } from "../style";
-import { useFlowContext } from "../FlowContext";
+import { nodeCardClass, nodeHeaderClass, nodeMetaClass, nodeTitleClass } from '../style';
+import { useFlowContext } from '../FlowContext';
 import collection from './collection';
-import schedule from "./schedule/";
-import { lang, NAMESPACE } from "../locale";
-
+import schedule from './schedule/';
+import { lang, NAMESPACE } from '../locale';
 
 function useUpdateConfigAction() {
   const { t } = useTranslation();
@@ -31,13 +37,13 @@ function useUpdateConfigAction() {
       await form.submit();
       await api.resource('workflows').update?.({
         filterByTk: workflow.id,
-        values: form.values
+        values: form.values,
       });
       ctx.setVisible(false);
       refresh();
     },
   };
-};
+}
 
 export interface Trigger {
   title: string;
@@ -50,7 +56,7 @@ export interface Trigger {
   components?: { [key: string]: any };
   render?(props): React.ReactNode;
   getter?(node: any): React.ReactNode;
-};
+}
 
 export const triggers = new Registry<Trigger>();
 
@@ -76,14 +82,14 @@ function TriggerExecution() {
           title: <InfoOutlined />,
           shape: 'circle',
           className: 'workflow-node-job-button',
-          type: 'primary'
+          type: 'primary',
         },
         properties: {
           [execution.id]: {
             type: 'void',
             'x-decorator': 'Form',
             'x-decorator-props': {
-              initialValue: execution
+              initialValue: execution,
             },
             'x-component': 'Action.Modal',
             title: (
@@ -100,7 +106,7 @@ function TriggerExecution() {
                 'x-decorator': 'FormItem',
                 'x-component': 'DatePicker',
                 'x-component-props': {
-                  showTime: true
+                  showTime: true,
                 },
                 'x-read-pretty': true,
               },
@@ -113,13 +119,13 @@ function TriggerExecution() {
                   className: css`
                     padding: 1em;
                     background-color: #eee;
-                  `
+                  `,
                 },
                 'x-read-pretty': true,
-              }
-            }
-          }
-        }
+              },
+            },
+          },
+        },
       }}
     />
   );
@@ -160,9 +166,13 @@ export const TriggerConfig = () => {
               'x-decorator': 'Form',
               'x-decorator-props': {
                 useValues(options) {
-                  return useRequest(() => Promise.resolve({
-                    data: { config },
-                  }), options);
+                  return useRequest(
+                    () =>
+                      Promise.resolve({
+                        data: { config },
+                      }),
+                    options,
+                  );
                 },
               },
               properties: {
@@ -172,52 +182,52 @@ export const TriggerConfig = () => {
                   'x-component': 'fieldset',
                   'x-component-props': {
                     className: css`
-                      .ant-select{
+                      .ant-select {
                         width: auto;
                         min-width: 6em;
                       }
-                    `
+                    `,
                   },
-                  properties: fieldset
+                  properties: fieldset,
                 },
                 actions: {
                   type: 'void',
                   'x-component': 'Action.Drawer.Footer',
                   properties: executed
-                  ? {
-                    close: {
-                      title: '{{t("Close")}}',
-                      'x-component': 'Action',
-                      'x-component-props': {
-                        useAction: '{{ cm.useCancelAction }}',
-                      },
-                    }
-                  }
-                  : {
-                    cancel: {
-                      title: '{{t("Cancel")}}',
-                      'x-component': 'Action',
-                      'x-component-props': {
-                        useAction: '{{ cm.useCancelAction }}',
-                      },
-                    },
-                    submit: {
-                      title: '{{t("Submit")}}',
-                      'x-component': 'Action',
-                      'x-component-props': {
-                        type: 'primary',
-                        useAction: useUpdateConfigAction
+                    ? {
+                        close: {
+                          title: '{{t("Close")}}',
+                          'x-component': 'Action',
+                          'x-component-props': {
+                            useAction: '{{ cm.useCancelAction }}',
+                          },
+                        },
                       }
-                    }
-                  }
-                }
-              }
-            }
-          }
+                    : {
+                        cancel: {
+                          title: '{{t("Cancel")}}',
+                          'x-component': 'Action',
+                          'x-component-props': {
+                            useAction: '{{ cm.useCancelAction }}',
+                          },
+                        },
+                        submit: {
+                          title: '{{t("Submit")}}',
+                          'x-component': 'Action',
+                          'x-component-props': {
+                            type: 'primary',
+                            useAction: useUpdateConfigAction,
+                          },
+                        },
+                      },
+                },
+              },
+            },
+          },
         }}
         scope={scope}
         components={components}
       />
     </div>
   );
-}
+};

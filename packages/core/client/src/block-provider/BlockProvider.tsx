@@ -13,8 +13,8 @@ import {
   useAPIClient,
   useDesignable,
   useRecord,
-  WithoutTableFieldResource
-} from '../';
+  WithoutTableFieldResource,
+} from '@nocobase/client';
 import { CollectionProvider, useCollection, useCollectionManager } from '../collection-manager';
 import { useRecordIndex } from '../record-provider';
 import { SharedFilterProvider } from './SharedFilterProvider';

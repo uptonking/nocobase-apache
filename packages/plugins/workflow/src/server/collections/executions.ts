@@ -5,22 +5,22 @@ export default {
   fields: [
     {
       type: 'belongsTo',
-      name: 'workflow'
+      name: 'workflow',
     },
     {
       type: 'uid',
-      name: 'key'
+      name: 'key',
     },
     {
       type: 'boolean',
       name: 'useTransaction',
-      defaultValue: false
+      defaultValue: false,
     },
     // @deprecated
     {
       type: 'uuid',
       name: 'transaction',
-      defaultValue: null
+      defaultValue: null,
     },
     {
       type: 'hasMany',
@@ -33,6 +33,6 @@ export default {
     {
       type: 'integer',
       name: 'status',
-    }
-  ]
+    },
+  ],
 } as CollectionOptions;

@@ -1,6 +1,3 @@
 {
-  "packages": [
-    "core/*",
-    "packages/*"
-  ]
+  "packages": ["core/*", "packages/*"]
 }

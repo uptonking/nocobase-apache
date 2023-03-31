@@ -120,10 +120,7 @@ describe('get action', () => {
 
     const postProfile = await Profile.repository.findOne();
 
-    const response = await app
-      .agent()
-      .resource('posts.profile', p1.get('id'))
-      .get();
+    const response = await app.agent().resource('posts.profile', p1.get('id')).get();
 
     expect(response.body['id']).toEqual(postProfile.get('id'));
   });

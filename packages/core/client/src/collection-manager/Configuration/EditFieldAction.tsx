@@ -115,7 +115,7 @@ export const EditCollectionField = (props) => {
 };
 
 export const EditFieldAction = (props) => {
-  const { scope, getContainer, item: record,children } = props;
+  const { scope, getContainer, item: record, children } = props;
   const { getInterface } = useCollectionManager();
   const [visible, setVisible] = useState(false);
   const [schema, setSchema] = useState({});
@@ -155,7 +155,7 @@ export const EditFieldAction = (props) => {
             setVisible(true);
           }}
         >
-          {children||t('Edit')}
+          {children || t('Edit')}
         </a>
         <SchemaComponent
           schema={schema}

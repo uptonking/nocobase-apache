@@ -5,7 +5,7 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { findByUid } from '.';
 import { createDesignable } from '../..';
-import { GeneralSchemaDesigner, SchemaSettings, useAPIClient, useDesignable } from '../../../';
+import { GeneralSchemaDesigner, SchemaSettings, useAPIClient, useDesignable } from '@nocobase/client';
 
 const toItems = (properties = {}) => {
   const items = [];

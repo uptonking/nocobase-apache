@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import type { IApiComponentProps} from 'dumi/theme';
+import type { IApiComponentProps } from 'dumi/theme';
 import { context, useApiData, AnchorLink } from 'dumi/theme';
 
 const LOCALE_TEXTS = {
@@ -37,7 +37,7 @@ export default ({ identifier, export: expt }: IApiComponentProps) => {
             </tr>
           </thead>
           <tbody>
-            {data[expt].map(row => (
+            {data[expt].map((row) => (
               <tr key={row.identifier}>
                 <td>{row.identifier}</td>
                 <td>{row.description || '--'}</td>

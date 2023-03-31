@@ -1,1 +1,4 @@
-function o(){console.log("foo")}export default o;
+function o() {
+  console.log('foo');
+}
+export default o;

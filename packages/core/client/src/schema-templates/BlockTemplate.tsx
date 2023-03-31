@@ -1,7 +1,7 @@
 import { observer, useField, useFieldSchema } from '@formily/react';
 import React, { createContext, useContext, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
-import { RemoteSchemaComponent, useDesignable } from '..';
+import { RemoteSchemaComponent, useDesignable } from '@nocobase/client';
 import { useSchemaTemplateManager } from './SchemaTemplateManagerProvider';
 
 const BlockTemplateContext = createContext<any>({});

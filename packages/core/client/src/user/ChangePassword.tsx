@@ -3,7 +3,7 @@ import { uid } from '@formily/shared';
 import { Menu } from 'antd';
 import React, { useContext, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { ActionContext, SchemaComponent, useActionContext } from '../';
+import { ActionContext, SchemaComponent, useActionContext } from '@nocobase/client';
 import { useAPIClient } from '../api-client';
 import { DropdownVisibleContext } from './CurrentUser';
 

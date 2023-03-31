@@ -1,5 +1,5 @@
 import { toNumber, get as getWithPath } from 'lodash';
-import { Registry } from "@nocobase/utils";
+import { Registry } from '@nocobase/utils';
 
 import JobModel from '../models/Job';
 import Processor from '../Processor';
@@ -7,7 +7,6 @@ import Processor from '../Processor';
 export const calculators = new Registry<Function>();
 
 export default calculators;
-
 
 export type OperandType = '$context' | '$input' | '$jobsMapByNodeId' | '$calculation';
 
@@ -17,19 +16,19 @@ export type ObjectGetterOptions = {
 };
 
 export type JobGetterOptions = ObjectGetterOptions & {
-  nodeId: number
+  nodeId: number;
 };
 
 export type CalculationOptions = {
-  calculator: string,
-  operands: Operand[]
+  calculator: string;
+  operands: Operand[];
 };
 
 export type ValueOperand = string | number | boolean | null | Date;
 
 export type ConstantOperand = {
   type?: 'constant';
-  value: any
+  value: any;
 };
 
 export type ContextOperand = {
@@ -49,7 +48,7 @@ export type JobOperand = {
 
 export type Calculation = {
   type: '$calculation';
-  options: CalculationOptions
+  options: CalculationOptions;
 };
 
 // TODO(type): union type here is wrong
@@ -92,15 +91,13 @@ export function calculate(operand, lastJob: JobModel, processor: Processor) {
       if (!fn) {
         throw new Error(`no calculator function registered for "${operand.options.calculator}"`);
       }
-      return fn(...operand.options.operands.map(item => calculate(item, lastJob, processor)));
+      return fn(...operand.options.operands.map((item) => calculate(item, lastJob, processor)));
 
     // constant
     default:
       return operand.value;
   }
 }
-
-
 
 // built-in functions
 
@@ -141,8 +138,6 @@ calculators.register('>', gt);
 calculators.register('>=', gte);
 calculators.register('<', lt);
 calculators.register('<=', lte);
-
-
 
 function add(...args) {
   return args.reduce((sum, a) => sum + toNumber(a), 0);

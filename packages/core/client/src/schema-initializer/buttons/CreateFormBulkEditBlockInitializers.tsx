@@ -1,6 +1,6 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { SchemaInitializer } from '../..';
+import { SchemaInitializer } from '@nocobase/client';
 import { gridRowColWrap } from '../utils';
 
 export const CreateFormBulkEditBlockInitializers = (props: any) => {

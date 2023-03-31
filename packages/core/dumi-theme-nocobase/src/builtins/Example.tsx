@@ -15,10 +15,7 @@ export default (props: { route: any }) => {
         <div className="__dumi-default-example-wrapper-toolbar">
           {props.route.meta.description || props.route.meta.title}
           <span>
-            <button
-              className="__dumi-default-icon"
-              onClick={() => elm.current.contentWindow.location.reload()}
-            />
+            <button className="__dumi-default-icon" onClick={() => elm.current.contentWindow.location.reload()} />
             <a
               target="_blank"
               rel="noopener noreferrer"

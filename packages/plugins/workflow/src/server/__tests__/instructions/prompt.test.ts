@@ -4,8 +4,6 @@ import { MockServer } from '@nocobase/test';
 import { getApp, sleep } from '..';
 import { EXECUTION_STATUS, JOB_STATUS } from '../../constants';
 
-
-
 // NOTE: skipped because time is not stable on github ci, but should work in local
 describe.skip('workflow > instructions > prompt', () => {
   describe('base', () => {
@@ -28,8 +26,8 @@ describe.skip('workflow > instructions > prompt', () => {
         type: 'collection',
         config: {
           mode: 1,
-          collection: 'posts'
-        }
+          collection: 'posts',
+        },
       });
     });
 
@@ -40,9 +38,9 @@ describe.skip('workflow > instructions > prompt', () => {
         type: 'prompt',
         config: {
           actions: {
-            [JOB_STATUS.RESOLVED]: 'submit'
-          }
-        }
+            [JOB_STATUS.RESOLVED]: 'submit',
+          },
+        },
       });
 
       const post = await PostRepo.create({ values: { title: 't1' } });
@@ -58,8 +56,8 @@ describe.skip('workflow > instructions > prompt', () => {
         filterByTk: j1.id,
         values: {
           status: JOB_STATUS.RESOLVED,
-          result: { a: 1 }
-        }
+          result: { a: 1 },
+        },
       });
       expect(status).toBe(202);
 
@@ -88,9 +86,7 @@ describe.skip('workflow > instructions > prompt', () => {
 
     beforeEach(async () => {
       app = await getApp({
-        plugins: [
-          'users'
-        ]
+        plugins: ['users'],
       });
       agent = app.agent();
       db = app.db;
@@ -101,21 +97,26 @@ describe.skip('workflow > instructions > prompt', () => {
 
       users = await UserModel.bulkCreate([
         { id: 1, nickname: 'a' },
-        { id: 2, nickname: 'b' }
+        { id: 2, nickname: 'b' },
       ]);
 
       const userPlugin = app.getPlugin('users') as UserPlugin;
-      userAgents = users.map((user) => app.agent().auth(userPlugin.jwtService.sign({
-        userId: user.id,
-      }), { type: 'bearer' }));
+      userAgents = users.map((user) =>
+        app.agent().auth(
+          userPlugin.jwtService.sign({
+            userId: user.id,
+          }),
+          { type: 'bearer' },
+        ),
+      );
 
       workflow = await WorkflowModel.create({
         enabled: true,
         type: 'collection',
         config: {
           mode: 1,
-          collection: 'posts'
-        }
+          collection: 'posts',
+        },
       });
     });
 
@@ -126,8 +127,8 @@ describe.skip('workflow > instructions > prompt', () => {
         const n1 = await workflow.createNode({
           type: 'prompt',
           config: {
-            assignees: [users[0].id]
-          }
+            assignees: [users[0].id],
+          },
         });
 
         const post = await PostRepo.create({ values: { title: 't1' } });
@@ -146,15 +147,15 @@ describe.skip('workflow > instructions > prompt', () => {
         expect(usersJobs[0].jobId).toBe(j1.id);
 
         const res1 = await agent.resource('jobs').submit({
-          filterByTk: j1.id
+          filterByTk: j1.id,
         });
         expect(res1.status).toBe(401);
 
         const res2 = await userAgents[1].resource('jobs').submit({
           filterByTk: j1.id,
           values: {
-            status: JOB_STATUS.RESOLVED
-          }
+            status: JOB_STATUS.RESOLVED,
+          },
         });
         expect(res2.status).toBe(404);
 
@@ -162,8 +163,8 @@ describe.skip('workflow > instructions > prompt', () => {
           filterByTk: j1.id,
           values: {
             status: JOB_STATUS.RESOLVED,
-            result: { a: 1 }
-          }
+            result: { a: 1 },
+          },
         });
         expect(res3.status).toBe(202);
 
@@ -182,8 +183,8 @@ describe.skip('workflow > instructions > prompt', () => {
           filterByTk: j1.id,
           values: {
             status: JOB_STATUS.RESOLVED,
-            result: { a: 2 }
-          }
+            result: { a: 2 },
+          },
         });
         expect(res4.status).toBe(400);
       });
@@ -192,8 +193,8 @@ describe.skip('workflow > instructions > prompt', () => {
         const n1 = await workflow.createNode({
           type: 'prompt',
           config: {
-            assignees: [users[0].id, users[1].id]
-          }
+            assignees: [users[0].id, users[1].id],
+          },
         });
 
         const post = await PostRepo.create({ values: { title: 't1' } });
@@ -209,8 +210,8 @@ describe.skip('workflow > instructions > prompt', () => {
           filterByTk: j1.id,
           values: {
             status: JOB_STATUS.RESOLVED,
-            result: { a: 1 }
-          }
+            result: { a: 1 },
+          },
         });
         expect(res1.status).toBe(202);
 
@@ -224,8 +225,8 @@ describe.skip('workflow > instructions > prompt', () => {
           filterByTk: j1.id,
           values: {
             status: JOB_STATUS.RESOLVED,
-            result: { a: 2 }
-          }
+            result: { a: 2 },
+          },
         });
         expect(res2.status).toBe(400);
       });
@@ -234,8 +235,8 @@ describe.skip('workflow > instructions > prompt', () => {
         const n1 = await workflow.createNode({
           type: 'prompt',
           config: {
-            assignees: [users[0].id]
-          }
+            assignees: [users[0].id],
+          },
         });
 
         const post = await PostRepo.create({ values: { title: 't1' } });
@@ -252,8 +253,8 @@ describe.skip('workflow > instructions > prompt', () => {
           filterByTk: usersJobs[0].get('id'),
           values: {
             status: JOB_STATUS.RESOLVED,
-            result: { a: 1 }
-          }
+            result: { a: 1 },
+          },
         });
         expect(res.status).toBe(202);
 
@@ -273,8 +274,8 @@ describe.skip('workflow > instructions > prompt', () => {
           type: 'prompt',
           config: {
             assignees: [users[0].id, users[1].id],
-            mode: 1
-          }
+            mode: 1,
+          },
         });
 
         const post = await PostRepo.create({ values: { title: 't1' } });
@@ -283,7 +284,7 @@ describe.skip('workflow > instructions > prompt', () => {
 
         const UserJobModel = db.getModel('users_jobs');
         const pendingJobs = await UserJobModel.findAll({
-          order: [[ 'userId', 'ASC' ]]
+          order: [['userId', 'ASC']],
         });
         expect(pendingJobs.length).toBe(2);
 
@@ -291,8 +292,8 @@ describe.skip('workflow > instructions > prompt', () => {
           filterByTk: pendingJobs[0].get('id'),
           values: {
             status: JOB_STATUS.RESOLVED,
-            result: { a: 1 }
-          }
+            result: { a: 1 },
+          },
         });
         expect(res1.status).toBe(202);
 
@@ -304,7 +305,7 @@ describe.skip('workflow > instructions > prompt', () => {
         expect(j1.status).toBe(JOB_STATUS.PENDING);
         expect(j1.result).toBe(0.5);
         const usersJobs1 = await UserJobModel.findAll({
-          order: [[ 'userId', 'ASC' ]]
+          order: [['userId', 'ASC']],
         });
         expect(usersJobs1.length).toBe(2);
 
@@ -312,8 +313,8 @@ describe.skip('workflow > instructions > prompt', () => {
           filterByTk: pendingJobs[1].get('id'),
           values: {
             status: JOB_STATUS.RESOLVED,
-            result: { a: 2 }
-          }
+            result: { a: 2 },
+          },
         });
         expect(res2.status).toBe(202);
 
@@ -331,8 +332,8 @@ describe.skip('workflow > instructions > prompt', () => {
           type: 'prompt',
           config: {
             assignees: [users[0].id, users[1].id],
-            mode: 1
-          }
+            mode: 1,
+          },
         });
 
         const post = await PostRepo.create({ values: { title: 't1' } });
@@ -341,15 +342,15 @@ describe.skip('workflow > instructions > prompt', () => {
 
         const UserJobModel = db.getModel('users_jobs');
         const pendingJobs = await UserJobModel.findAll({
-          order: [[ 'userId', 'ASC' ]]
+          order: [['userId', 'ASC']],
         });
         expect(pendingJobs.length).toBe(2);
 
         const res1 = await userAgents[0].resource('users_jobs').submit({
           filterByTk: pendingJobs[0].get('id'),
           values: {
-            status: JOB_STATUS.REJECTED
-          }
+            status: JOB_STATUS.REJECTED,
+          },
         });
         expect(res1.status).toBe(202);
 
@@ -361,7 +362,7 @@ describe.skip('workflow > instructions > prompt', () => {
         expect(j1.status).toBe(JOB_STATUS.REJECTED);
         expect(j1.result).toBe(0.5);
         const usersJobs1 = await UserJobModel.findAll({
-          order: [[ 'userId', 'ASC' ]]
+          order: [['userId', 'ASC']],
         });
         expect(usersJobs1.length).toBe(2);
 
@@ -369,8 +370,8 @@ describe.skip('workflow > instructions > prompt', () => {
           filterByTk: pendingJobs[1].get('id'),
           values: {
             status: JOB_STATUS.REJECTED,
-            result: { a: 2 }
-          }
+            result: { a: 2 },
+          },
         });
         expect(res2.status).toBe(400);
       });
@@ -380,8 +381,8 @@ describe.skip('workflow > instructions > prompt', () => {
           type: 'prompt',
           config: {
             assignees: [users[0].id, users[1].id],
-            mode: 1
-          }
+            mode: 1,
+          },
         });
 
         const post = await PostRepo.create({ values: { title: 't1' } });
@@ -390,15 +391,15 @@ describe.skip('workflow > instructions > prompt', () => {
 
         const UserJobModel = db.getModel('users_jobs');
         const pendingJobs = await UserJobModel.findAll({
-          order: [[ 'userId', 'ASC' ]]
+          order: [['userId', 'ASC']],
         });
         expect(pendingJobs.length).toBe(2);
 
         const res1 = await userAgents[0].resource('users_jobs').submit({
           filterByTk: pendingJobs[0].get('id'),
           values: {
-            status: JOB_STATUS.RESOLVED
-          }
+            status: JOB_STATUS.RESOLVED,
+          },
         });
         expect(res1.status).toBe(202);
 
@@ -410,7 +411,7 @@ describe.skip('workflow > instructions > prompt', () => {
         expect(j1.status).toBe(JOB_STATUS.PENDING);
         expect(j1.result).toBe(0.5);
         const usersJobs1 = await UserJobModel.findAll({
-          order: [[ 'userId', 'ASC' ]]
+          order: [['userId', 'ASC']],
         });
         expect(usersJobs1.length).toBe(2);
 
@@ -418,8 +419,8 @@ describe.skip('workflow > instructions > prompt', () => {
           filterByTk: pendingJobs[1].get('id'),
           values: {
             status: JOB_STATUS.REJECTED,
-            result: { a: 2 }
-          }
+            result: { a: 2 },
+          },
         });
         expect(res2.status).toBe(202);
 
@@ -439,8 +440,8 @@ describe.skip('workflow > instructions > prompt', () => {
           type: 'prompt',
           config: {
             assignees: [users[0].id, users[1].id],
-            mode: -1
-          }
+            mode: -1,
+          },
         });
 
         const post = await PostRepo.create({ values: { title: 't1' } });
@@ -449,15 +450,15 @@ describe.skip('workflow > instructions > prompt', () => {
 
         const UserJobModel = db.getModel('users_jobs');
         const pendingJobs = await UserJobModel.findAll({
-          order: [[ 'userId', 'ASC' ]]
+          order: [['userId', 'ASC']],
         });
         expect(pendingJobs.length).toBe(2);
 
         const res1 = await userAgents[0].resource('users_jobs').submit({
           filterByTk: pendingJobs[0].get('id'),
           values: {
-            status: JOB_STATUS.RESOLVED
-          }
+            status: JOB_STATUS.RESOLVED,
+          },
         });
         expect(res1.status).toBe(202);
 
@@ -472,8 +473,8 @@ describe.skip('workflow > instructions > prompt', () => {
         const res2 = await userAgents[1].resource('users_jobs').submit({
           filterByTk: pendingJobs[1].get('id'),
           values: {
-            status: JOB_STATUS.REJECTED
-          }
+            status: JOB_STATUS.REJECTED,
+          },
         });
         expect(res2.status).toBe(400);
       });
@@ -483,8 +484,8 @@ describe.skip('workflow > instructions > prompt', () => {
           type: 'prompt',
           config: {
             assignees: [users[0].id, users[1].id],
-            mode: -1
-          }
+            mode: -1,
+          },
         });
 
         const post = await PostRepo.create({ values: { title: 't1' } });
@@ -493,15 +494,15 @@ describe.skip('workflow > instructions > prompt', () => {
 
         const UserJobModel = db.getModel('users_jobs');
         const pendingJobs = await UserJobModel.findAll({
-          order: [[ 'userId', 'ASC' ]]
+          order: [['userId', 'ASC']],
         });
         expect(pendingJobs.length).toBe(2);
 
         const res1 = await userAgents[0].resource('users_jobs').submit({
           filterByTk: pendingJobs[0].get('id'),
           values: {
-            status: JOB_STATUS.REJECTED
-          }
+            status: JOB_STATUS.REJECTED,
+          },
         });
         expect(res1.status).toBe(202);
 
@@ -516,8 +517,8 @@ describe.skip('workflow > instructions > prompt', () => {
         const res2 = await userAgents[1].resource('users_jobs').submit({
           filterByTk: pendingJobs[1].get('id'),
           values: {
-            status: JOB_STATUS.RESOLVED
-          }
+            status: JOB_STATUS.RESOLVED,
+          },
         });
         expect(res2.status).toBe(202);
 
@@ -535,8 +536,8 @@ describe.skip('workflow > instructions > prompt', () => {
           type: 'prompt',
           config: {
             assignees: [users[0].id, users[1].id],
-            mode: -1
-          }
+            mode: -1,
+          },
         });
 
         const post = await PostRepo.create({ values: { title: 't1' } });
@@ -545,15 +546,15 @@ describe.skip('workflow > instructions > prompt', () => {
 
         const UserJobModel = db.getModel('users_jobs');
         const pendingJobs = await UserJobModel.findAll({
-          order: [[ 'userId', 'ASC' ]]
+          order: [['userId', 'ASC']],
         });
         expect(pendingJobs.length).toBe(2);
 
         const res1 = await userAgents[0].resource('users_jobs').submit({
           filterByTk: pendingJobs[0].get('id'),
           values: {
-            status: JOB_STATUS.REJECTED
-          }
+            status: JOB_STATUS.REJECTED,
+          },
         });
         expect(res1.status).toBe(202);
 
@@ -568,8 +569,8 @@ describe.skip('workflow > instructions > prompt', () => {
         const res2 = await userAgents[1].resource('users_jobs').submit({
           filterByTk: pendingJobs[1].get('id'),
           values: {
-            status: JOB_STATUS.REJECTED
-          }
+            status: JOB_STATUS.REJECTED,
+          },
         });
         expect(res2.status).toBe(202);
 
@@ -583,12 +584,8 @@ describe.skip('workflow > instructions > prompt', () => {
       });
     });
 
-    describe('mode: (0,1) (multiple record, all to percent)', () => {
+    describe('mode: (0,1) (multiple record, all to percent)', () => {});
 
-    });
-
-    describe('mode: (-1,0) (multiple record, any to percent)', () => {
-
-    });
+    describe('mode: (-1,0) (multiple record, any to percent)', () => {});
   });
 });

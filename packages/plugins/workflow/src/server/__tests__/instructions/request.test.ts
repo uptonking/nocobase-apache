@@ -134,7 +134,6 @@ describe('workflow > instructions > request', () => {
       [job] = await execution.getJobs();
       expect(job.status).toEqual(JOB_STATUS.REJECTED);
       expect(job.result).toMatch('timeout');
-
     });
 
     it('request - ignoreFail', async () => {

@@ -2,7 +2,7 @@ import { MenuOutlined } from '@ant-design/icons';
 import { ISchema, useFieldSchema } from '@formily/react';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { SchemaInitializer, SchemaSettings } from '../..';
+import { SchemaInitializer, SchemaSettings } from '@nocobase/client';
 import { useAPIClient } from '../../api-client';
 import { createDesignable, useDesignable } from '../../schema-component';
 

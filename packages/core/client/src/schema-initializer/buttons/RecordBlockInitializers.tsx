@@ -1,7 +1,7 @@
 import { Schema, useFieldSchema } from '@formily/react';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { SchemaInitializer, useCollection, useCollectionManager } from '../..';
+import { SchemaInitializer, useCollection, useCollectionManager } from '@nocobase/client';
 import { gridRowColWrap } from '../utils';
 
 const recursiveParent = (schema: Schema) => {

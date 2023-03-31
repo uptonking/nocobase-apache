@@ -7,7 +7,7 @@ interface IRegisterBabelOpts {
   only: string[];
 }
 
-export default function(opts: IRegisterBabelOpts) {
+export default function (opts: IRegisterBabelOpts) {
   const { cwd, only } = opts;
   const { opts: babelConfig } = getBabelConfig({
     target: 'node',

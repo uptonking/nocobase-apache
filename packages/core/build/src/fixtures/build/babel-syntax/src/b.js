@@ -1,4 +1,3 @@
-
 export function b1() {
   alert('b1');
 }

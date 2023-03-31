@@ -9,7 +9,7 @@ export default {
       interface: 'string',
       type: 'string',
       name: 'title',
-      title: '名称'
+      title: '名称',
     },
     // which workflow belongs to
     {
@@ -21,7 +21,7 @@ export default {
       interface: 'linkTo',
       name: 'upstream',
       type: 'belongsTo',
-      target: 'flow_nodes'
+      target: 'flow_nodes',
     },
     {
       interface: 'linkTo',
@@ -38,7 +38,7 @@ export default {
       interface: 'select',
       name: 'branchIndex',
       type: 'integer',
-      title: 'branch index'
+      title: 'branch index',
     },
     // Note: for reasons:
     // 1. redirect type node to solve cycle flow.
@@ -47,20 +47,20 @@ export default {
       interface: 'linkTo',
       name: 'downstream',
       type: 'belongsTo',
-      target: 'flow_nodes'
+      target: 'flow_nodes',
     },
     {
       interface: 'select',
       type: 'string',
       name: 'type',
-      title: '类型'
+      title: '类型',
     },
     {
       interface: 'json',
       type: 'jsonb',
       name: 'config',
       title: '配置',
-      defaultValue: {}
-    }
-  ]
+      defaultValue: {},
+    },
+  ],
 } as CollectionOptions;

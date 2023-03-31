@@ -26,9 +26,7 @@ const SideMenu: FC<INavbarProps> = ({ mobileMenuCollapsed, location, darkPrefix 
     meta,
   } = useContext(context);
   const isHiddenMenus =
-    Boolean((meta.hero || meta.features || meta.gapless) && mode === 'site') ||
-    meta.sidemenu === false ||
-    undefined;
+    Boolean((meta.hero || meta.features || meta.gapless) && mode === 'site') || meta.sidemenu === false || undefined;
 
   return (
     <div
@@ -53,8 +51,7 @@ const SideMenu: FC<INavbarProps> = ({ mobileMenuCollapsed, location, darkPrefix 
             <p>
               <object
                 type="image/svg+xml"
-                data={`https://img.shields.io/github/stars${repoUrl.match(/((\/[^\/]+){2})$/)[1]
-                  }?style=social`}
+                data={`https://img.shields.io/github/stars${repoUrl.match(/((\/[^\/]+){2})$/)[1]}?style=social`}
               />
             </p>
           )}
@@ -64,10 +61,10 @@ const SideMenu: FC<INavbarProps> = ({ mobileMenuCollapsed, location, darkPrefix 
         <div className="__dumi-default-menu-mobile-area">
           {!!navItems.length && (
             <ul className="__dumi-default-menu-nav-list">
-              {navItems.map(nav => {
+              {navItems.map((nav) => {
                 const child = Boolean(nav.children?.length) && (
                   <ul>
-                    {nav.children.map(item => (
+                    {nav.children.map((item) => (
                       <li key={item.path || item.title}>
                         <NavLink to={item.path}>{item.title}</NavLink>
                       </li>
@@ -91,14 +88,17 @@ const SideMenu: FC<INavbarProps> = ({ mobileMenuCollapsed, location, darkPrefix 
         {/* menu list */}
         <ul className="__dumi-default-menu-list">
           {!isHiddenMenus &&
-            menu.map(item => {
+            menu.map((item) => {
               // always use meta from routes to reduce menu data size
               const hasSlugs = Boolean(meta.slugs?.length);
               const hasChildren = item.children && Boolean(item.children.length);
               const show1LevelSlugs =
-                meta.toc === 'menu' && !hasChildren && hasSlugs && item.path === location.pathname.replace(/([^^])\/$/, '$1');
+                meta.toc === 'menu' &&
+                !hasChildren &&
+                hasSlugs &&
+                item.path === location.pathname.replace(/([^^])\/$/, '$1');
               const menuPaths = hasChildren
-                ? item.children.map(i => i.path)
+                ? item.children.map((i) => i.path)
                 : [
                     item.path,
                     // handle menu group which has no index route and no valid children
@@ -109,16 +109,13 @@ const SideMenu: FC<INavbarProps> = ({ mobileMenuCollapsed, location, darkPrefix 
 
               return (
                 <li key={item.path || item.title}>
-                  <NavLink
-                    to={item.path}
-                    isActive={() => menuPaths.includes(location.pathname)}
-                  >
+                  <NavLink to={item.path} isActive={() => menuPaths.includes(location.pathname)}>
                     {item.title}
                   </NavLink>
                   {/* group children */}
                   {Boolean(item.children && item.children.length) && (
                     <ul>
-                      {item.children.map(child => (
+                      {item.children.map((child) => (
                         <li key={child.path}>
                           <NavLink to={child.path} exact>
                             <span>{child.title}</span>
@@ -126,9 +123,9 @@ const SideMenu: FC<INavbarProps> = ({ mobileMenuCollapsed, location, darkPrefix 
                           {/* group children slugs */}
                           {Boolean(
                             meta.toc === 'menu' &&
-                            typeof window !== 'undefined' &&
-                            child.path === location.pathname &&
-                            hasSlugs,
+                              typeof window !== 'undefined' &&
+                              child.path === location.pathname &&
+                              hasSlugs,
                           ) && <SlugList slugs={meta.slugs} />}
                         </li>
                       ))}

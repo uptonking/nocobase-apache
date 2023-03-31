@@ -27,11 +27,7 @@ export function AntdConfigProvider(props) {
     return <Spin />;
   }
   return (
-    <ConfigProvider
-      dropdownMatchSelectWidth={false}
-      {...others}
-      locale={locale[i18n.language].antd}
-    >
+    <ConfigProvider dropdownMatchSelectWidth={false} {...others} locale={locale[i18n.language].antd}>
       {props.children}
     </ConfigProvider>
   );

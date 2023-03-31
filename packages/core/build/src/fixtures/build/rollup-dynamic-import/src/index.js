@@ -1,3 +1,3 @@
-const bar = import('./bar')
+const bar = import('./bar');
 
-console.log(bar())
+console.log(bar());

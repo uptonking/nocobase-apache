@@ -1,6 +1,5 @@
-
 class A {
   foo() {}
 }
 
-(new A()).foo();
+new A().foo();

@@ -33,7 +33,7 @@ import {
   Venn,
   Violin,
   Waterfall,
-  WordCloud
+  WordCloud,
 } from '@antv/g2plot';
 import { Field } from '@formily/core';
 import { observer, useField } from '@formily/react';

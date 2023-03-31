@@ -32,7 +32,7 @@ import { SystemSettingsProvider, SystemSettingsShortcut } from '../system-settin
 import { SigninPage, SignupPage } from '../user';
 import { SigninPageExtensionProvider } from '../user/SigninPageExtension';
 import { compose } from './compose';
-
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 export interface ApplicationOptions {
   apiClient?: any;
   i18n?: any;
@@ -51,13 +51,19 @@ export type PluginCallback = () => Promise<any>;
 const App = React.memo((props: any) => {
   const C = compose(...props.providers)(() => {
     const routes = useRoutes();
+    // console.log(';; routes ', routes)
     return (
-      <div>
-        <RouteSwitch routes={routes} />
-      </div>
+      // <div>
+      <RouteSwitch routes={routes} />
+      // </div>
     );
   });
-  return <C />;
+
+  return (
+    <Router>
+      <C />
+    </Router>
+  );
 });
 
 export class Application {

@@ -5,8 +5,6 @@ import CollectionFieldset from '../components/CollectionFieldset';
 import { NAMESPACE } from '../locale';
 import { collection, filter, values } from '../schemas/collection';
 
-
-
 export default {
   title: `{{t("Update record", { ns: "${NAMESPACE}" })}}`,
   type: 'update',
@@ -17,16 +15,14 @@ export default {
       ...filter,
       title: `{{t("Only update records matching conditions", { ns: "${NAMESPACE}" })}}`,
     },
-    'config.params.values': values
+    'config.params.values': values,
   },
-  view: {
-
-  },
+  view: {},
   scope: {
-    useCollectionDataSource
+    useCollectionDataSource,
   },
   components: {
     VariableComponent,
-    CollectionFieldset
-  }
+    CollectionFieldset,
+  },
 };

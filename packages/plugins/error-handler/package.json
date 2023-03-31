@@ -9,8 +9,8 @@
       "url": "http://www.apache.org/licenses/LICENSE-2.0"
     }
   ],
-  "main": "./lib/index.js",
-  "types": "./lib/index.d.ts",
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
   "dependencies": {
     "@formily/json-schema": "^2.0.15",
     "@nocobase/server": "0.8.1-alpha.4"

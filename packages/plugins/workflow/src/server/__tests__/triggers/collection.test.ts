@@ -3,8 +3,6 @@ import Database from '@nocobase/database';
 import { getApp, sleep } from '..';
 import { EXECUTION_STATUS } from '../../constants';
 
-
-
 describe('workflow > triggers > collection', () => {
   let app: Application;
   let db: Database;
@@ -28,15 +26,15 @@ describe('workflow > triggers > collection', () => {
         type: 'collection',
         config: {
           mode: 1,
-          collection: 'posts'
-        }
+          collection: 'posts',
+        },
       });
 
       await workflow.update({
         config: {
           ...workflow.config,
-          collection: 'comments'
-        }
+          collection: 'comments',
+        },
       });
 
       const post = await PostRepo.create({ values: { title: 't1' } });
@@ -55,8 +53,8 @@ describe('workflow > triggers > collection', () => {
         type: 'collection',
         config: {
           mode: 2,
-          collection: 'posts'
-        }
+          collection: 'posts',
+        },
       });
 
       const post = await PostRepo.create({ values: { title: 't1' } });
@@ -76,8 +74,8 @@ describe('workflow > triggers > collection', () => {
         config: {
           mode: 2,
           collection: 'posts',
-          changed: ['title']
-        }
+          changed: ['title'],
+        },
       });
 
       const post = await PostRepo.create({ values: { title: 't1' } });
@@ -98,8 +96,8 @@ describe('workflow > triggers > collection', () => {
         config: {
           mode: 2,
           collection: 'posts',
-          changed: ['published']
-        }
+          changed: ['published'],
+        },
       });
 
       const post = await PostRepo.create({ values: { title: 't1' } });

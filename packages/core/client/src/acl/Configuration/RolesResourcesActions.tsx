@@ -5,7 +5,7 @@ import { Checkbox, Table, Tag } from 'antd';
 import { isEmpty } from 'lodash';
 import React, { createContext } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useCollectionManager, useCompile, useRecord } from '../..';
+import { useCollectionManager, useCompile, useRecord } from '@nocobase/client';
 import { useAvailableActions } from './RoleTable';
 import { ScopeSelect } from './ScopeSelect';
 

@@ -4,13 +4,13 @@ export default {
   $ne(val, ctx) {
     return val === null
       ? {
-        [Op.ne]: null,
-      }
+          [Op.ne]: null,
+        }
       : {
-        [Op.or]: {
-          [Op.ne]: val,
-          [Op.is]: null,
-        },
-      };
+          [Op.or]: {
+            [Op.ne]: val,
+            [Op.is]: null,
+          },
+        };
   },
 } as Record<string, any>;

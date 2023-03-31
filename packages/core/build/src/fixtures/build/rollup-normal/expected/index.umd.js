@@ -1,12 +1,11 @@
 (function (factory) {
-  typeof define === 'function' && define.amd ? define(['bar'], factory) :
-  factory();
-}((function () { 'use strict';
+  typeof define === 'function' && define.amd ? define(['bar'], factory) : factory();
+})(function () {
+  'use strict';
 
-  function foo () {
+  function foo() {
     return 'foo';
   }
 
   console.log(foo());
-
-})));
+});

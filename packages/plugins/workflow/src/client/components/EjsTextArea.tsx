@@ -3,11 +3,11 @@ import { Row, Col } from 'antd';
 import { CopyOutlined, ToolOutlined } from '@ant-design/icons';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 
-import {Operand, VariableTypes, VariableTypesContext} from '../calculators';
+import { Operand, VariableTypes, VariableTypesContext } from '../calculators';
 import { Button, Input, message, Tooltip } from 'antd';
 import { useFlowContext } from '../FlowContext';
 import { useCollectionManager, useCompile } from '@nocobase/client';
-import {useWorkflowTranslation} from '../locale';
+import { useWorkflowTranslation } from '../locale';
 
 function getVal(operand) {
   const { t } = useWorkflowTranslation();
@@ -20,28 +20,28 @@ function getVal(operand) {
     if (pathArr.length > 0) {
       const type = pathArr[0];
       if (type == '$context') {
-        return `<%=${pathArr.map((value, index) => {
-          if (index === 0) {
-            return 'ctx';
-          }
-          return value;
-        }).join('.')}%>`;
+        return `<%=${pathArr
+          .map((value, index) => {
+            if (index === 0) {
+              return 'ctx';
+            }
+            return value;
+          })
+          .join('.')}%>`;
       }
-      if (pathArr.length>1 && type == '$jobsMapByNodeId') {
-        const nodeId = pathArr[1]
+      if (pathArr.length > 1 && type == '$jobsMapByNodeId') {
+        const nodeId = pathArr[1];
         const node = nodes.find((n) => n.id == nodeId);
         if (node) {
           if (node.type === 'calculation') {
             return `<%= node[${nodeId}] // ${t('Calculation result')} %>`;
           }
-          if (pathArr.length>2 && node?.config?.collection) {
-            const fieldName = pathArr[2]
+          if (pathArr.length > 2 && node?.config?.collection) {
+            const fieldName = pathArr[2];
             const fields = getCollectionFields(node?.config?.collection);
             const field = fields.find((f) => f.name == fieldName);
             if (field) {
-              return `<%= node[${nodeId}].${fieldName} // ${compile(
-                field.uiSchema?.title || field.name,
-              )} %>`;
+              return `<%= node[${nodeId}].${fieldName} // ${compile(field.uiSchema?.title || field.name)} %>`;
             }
             return `<%= node[${nodeId}].${fieldName}%>`;
           }

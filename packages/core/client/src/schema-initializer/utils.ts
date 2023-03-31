@@ -2,7 +2,7 @@ import { ISchema, Schema, useFieldSchema, useForm } from '@formily/react';
 import { uid } from '@formily/shared';
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { SchemaInitializerItemOptions } from '../';
+import { SchemaInitializerItemOptions } from '@nocobase/client';
 import { useCollection, useCollectionManager } from '../collection-manager';
 import { useActionContext, useDesignable } from '../schema-component';
 import { useSchemaTemplateManager } from '../schema-templates';

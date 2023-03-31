@@ -1,8 +1,5 @@
-
 module.exports = function () {
   return {
-    plugins: [
-      require.resolve('./p1'),
-    ],
+    plugins: [require.resolve('./p1')],
   };
-}
+};

@@ -1,6 +1,5 @@
-
 const foo = 'bar';
 
-export default function() {
+export default function () {
   return foo;
 }

@@ -32,13 +32,16 @@ const FieldsSelect = observer((props) => {
       `}
     >
       {fields
-        .filter(field => (
-          !field.hidden
-          && (field.uiSchema ? !field.uiSchema['x-read-pretty'] : true)
-          && !['linkTo', 'hasOne', 'hasMany', 'belongsToMany'].includes(field.type)
-        ))
-        .map(field => (
-          <Select.Option key={field.name} value={field.name}>{compile(field.uiSchema?.title)}</Select.Option>
+        .filter(
+          (field) =>
+            !field.hidden &&
+            (field.uiSchema ? !field.uiSchema['x-read-pretty'] : true) &&
+            !['linkTo', 'hasOne', 'hasMany', 'belongsToMany'].includes(field.type),
+        )
+        .map((field) => (
+          <Select.Option key={field.name} value={field.name}>
+            {compile(field.uiSchema?.title)}
+          </Select.Option>
         ))}
     </Select>
   );
@@ -58,8 +61,6 @@ const collectionModeOptions = [
   { label: `{{t("After record deleted", { ns: "${NAMESPACE}" })}}`, value: COLLECTION_TRIGGER_MODE.DELETED },
 ];
 
-
-
 export default {
   title: `{{t("Collection event", { ns: "${NAMESPACE}" })}}`,
   type: 'collection',
@@ -74,7 +75,7 @@ export default {
             state: {
               visible: '{{!!$self.value}}',
             },
-          }
+          },
         },
         {
           target: 'config.changed',
@@ -82,7 +83,7 @@ export default {
             state: {
               visible: '{{!!$self.value}}',
             },
-          }
+          },
         },
         {
           target: 'config.condition',
@@ -90,9 +91,9 @@ export default {
             state: {
               visible: '{{!!$self.value}}',
             },
-          }
-        }
-      ]
+          },
+        },
+      ],
     },
     'config.mode': {
       type: 'number',
@@ -102,7 +103,7 @@ export default {
       'x-component': 'Select',
       'x-component-props': {
         options: collectionModeOptions,
-        placeholder: `{{t("Trigger on", { ns: "${NAMESPACE}" })}}`
+        placeholder: `{{t("Trigger on", { ns: "${NAMESPACE}" })}}`,
       },
       required: true,
       'x-reactions': [
@@ -112,9 +113,9 @@ export default {
             state: {
               disabled: `{{!($self.value & ${COLLECTION_TRIGGER_MODE.UPDATED})}}`,
             },
-          }
+          },
         },
-      ]
+      ],
     },
     'config.changed': {
       type: 'array',
@@ -125,26 +126,24 @@ export default {
       'x-component': 'FieldsSelect',
       'x-component-props': {
         mode: 'multiple',
-        placeholder: '{{t("Select Field")}}'
-      }
+        placeholder: '{{t("Select Field")}}',
+      },
     },
     'config.condition': {
       ...filter,
       name: 'config.condition',
-      title: `{{t("Only triggers when match conditions", { ns: "${NAMESPACE}" })}}`
-    }
+      title: `{{t("Only triggers when match conditions", { ns: "${NAMESPACE}" })}}`,
+    },
   },
   scope: {
-    useCollectionDataSource
+    useCollectionDataSource,
   },
   components: {
-    FieldsSelect
+    FieldsSelect,
   },
   getOptions(config) {
     const { t } = useWorkflowTranslation();
-    const options: any[] = [
-      { value: 'data', label: t('Trigger data') },
-    ];
+    const options: any[] = [{ value: 'data', label: t('Trigger data') }];
     return options;
   },
   getter(props) {
@@ -161,5 +160,5 @@ export default {
         }}
       />
     );
-  }
+  },
 };

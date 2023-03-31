@@ -1,6 +1,13 @@
 import { useField, useFieldSchema } from '@formily/react';
 import React, { useLayoutEffect } from 'react';
-import { SortableItem, useCollection, useCollectionManager, useCompile, useDesignable, useDesigner } from '../../../';
+import {
+  SortableItem,
+  useCollection,
+  useCollectionManager,
+  useCompile,
+  useDesignable,
+  useDesigner,
+} from '@nocobase/client';
 import { designerCss } from './Table.Column.ActionBar';
 import { isCollectionFieldComponent } from './utils';
 

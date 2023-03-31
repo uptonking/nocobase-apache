@@ -1,8 +1,5 @@
 import React, { useContext } from 'react';
-import {
-  CloseOutlined,
-  DeleteOutlined,
-} from '@ant-design/icons';
+import { CloseOutlined, DeleteOutlined } from '@ant-design/icons';
 import { css, cx } from '@emotion/css';
 import { ISchema, useForm } from '@formily/react';
 import { Button, message, Modal, Tag } from 'antd';
@@ -10,7 +7,14 @@ import { useTranslation } from 'react-i18next';
 import parse from 'json-templates';
 
 import { Registry } from '@nocobase/utils/client';
-import { SchemaComponent, useActionContext, useAPIClient, useCompile, useRequest, useResourceActionContext } from '@nocobase/client';
+import {
+  SchemaComponent,
+  useActionContext,
+  useAPIClient,
+  useCompile,
+  useRequest,
+  useResourceActionContext,
+} from '@nocobase/client';
 
 import { nodeBlockClass, nodeCardClass, nodeClass, nodeHeaderClass, nodeMetaClass, nodeTitleClass } from '../style';
 import { AddButton } from '../AddButton';
@@ -27,7 +31,7 @@ import update from './update';
 import destroy from './destroy';
 import { JobStatusOptions, JobStatusOptionsMap } from '../constants';
 import { lang, NAMESPACE } from '../locale';
-import request from "./request";
+import request from './request';
 
 export interface Instruction {
   title: string;
@@ -41,7 +45,7 @@ export interface Instruction {
   render?(props): React.ReactElement;
   endding?: boolean;
   getter?(node: any): React.ReactElement;
-};
+}
 
 export const instructions = new Registry<Instruction>();
 
@@ -75,14 +79,14 @@ function useUpdateAction() {
         filterByTk: data.id,
         values: {
           title: form.values.title,
-          config: form.values.config
-        }
+          config: form.values.config,
+        },
       });
       ctx.setVisible(false);
       refresh();
     },
   };
-};
+}
 
 const NodeContext = React.createContext(null);
 
@@ -96,35 +100,31 @@ export function Node({ data }) {
   return (
     <NodeContext.Provider value={data}>
       <div className={cx(nodeBlockClass)}>
-        {instruction.render
-          ? instruction.render(data)
-          : <NodeDefaultView data={data} />
-        }
-        {!instruction.endding
-          ? <AddButton upstream={data} />
-          : (
-            <div
-              className={css`
-                flex-grow: 1;
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                justify-content: center;
-                width: 1px;
-                height: 6em;
-                padding: 2em 0;
-                background-color: #f0f2f5;
+        {instruction.render ? instruction.render(data) : <NodeDefaultView data={data} />}
+        {!instruction.endding ? (
+          <AddButton upstream={data} />
+        ) : (
+          <div
+            className={css`
+              flex-grow: 1;
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+              justify-content: center;
+              width: 1px;
+              height: 6em;
+              padding: 2em 0;
+              background-color: #f0f2f5;
 
-                .anticon{
-                  font-size: 1.5em;
-                  line-height: 100%;
-                }
-              `}
-            >
-              <CloseOutlined />
-            </div>
-          )
-        }
+              .anticon {
+                font-size: 1.5em;
+                line-height: 100%;
+              }
+            `}
+          >
+            <CloseOutlined />
+          </div>
+        )}
       </div>
     </NodeContext.Provider>
   );
@@ -142,31 +142,38 @@ export function RemoveButton() {
 
   async function onRemove() {
     async function onOk() {
-      const { data: { data: node } } = await resource.destroy({
-        filterByTk: current.id
+      const {
+        data: { data: node },
+      } = await resource.destroy({
+        filterByTk: current.id,
       });
       onNodeRemoved(node);
     }
 
-    const usingNodes = nodes.filter(node => {
+    const usingNodes = nodes.filter((node) => {
       if (node === current) {
         return false;
       }
 
       const template = parse(node.config);
-      const refs = template.parameters.filter(({ key }) => key.startsWith(`$jobsMapByNodeId.${current.id}.`) || key === `$jobsMapByNodeId.${current.id}`);
+      const refs = template.parameters.filter(
+        ({ key }) => key.startsWith(`$jobsMapByNodeId.${current.id}.`) || key === `$jobsMapByNodeId.${current.id}`,
+      );
       return refs.length;
     });
 
     if (usingNodes.length) {
       Modal.error({
         title: lang('Can not delete'),
-        content: lang('The result of this node has been referenced by other nodes ({{nodes}}), please remove the usage before deleting.', { nodes: usingNodes.map(item => `#${item.id}`).join(', ') }),
+        content: lang(
+          'The result of this node has been referenced by other nodes ({{nodes}}), please remove the usage before deleting.',
+          { nodes: usingNodes.map((item) => `#${item.id}`).join(', ') },
+        ),
       });
       return;
     }
 
-    const hasBranches = !nodes.find(item => item.upstream === current && item.branchIndex != null);
+    const hasBranches = !nodes.find((item) => item.upstream === current && item.branchIndex != null);
     const message = hasBranches
       ? t('Are you sure you want to delete it?')
       : lang('This node contains branches, deleting will also be preformed to them, are you sure?');
@@ -174,13 +181,11 @@ export function RemoveButton() {
     Modal.confirm({
       title: t('Delete'),
       content: message,
-      onOk
+      onOk,
     });
   }
 
-  return workflow.executed
-  ? null
-  : (
+  return workflow.executed ? null : (
     <Button
       type="text"
       shape="circle"
@@ -202,10 +207,13 @@ export function JobButton() {
   if (!job) {
     return (
       <span
-        className={cx('workflow-node-job-button', css`
-          border: 2px solid #d9d9d9;
-          border-radius: 50%;
-        `)}
+        className={cx(
+          'workflow-node-job-button',
+          css`
+            border: 2px solid #d9d9d9;
+            border-radius: 50%;
+          `,
+        )}
       />
     );
   }
@@ -224,19 +232,23 @@ export function JobButton() {
             'x-component-props': {
               title: icon,
               shape: 'circle',
-              className: ['workflow-node-job-button', css`
-                background-color: ${color};
-                &:hover,&:focus{
-                  background-color: ${color}
-                }
-              `]
+              className: [
+                'workflow-node-job-button',
+                css`
+                  background-color: ${color};
+                  &:hover,
+                  &:focus {
+                    background-color: ${color};
+                  }
+                `,
+              ],
             },
             properties: {
               [job.id]: {
                 type: 'void',
                 'x-decorator': 'Form',
                 'x-decorator-props': {
-                  initialValue: job
+                  initialValue: job,
                 },
                 'x-component': 'Action.Modal',
                 title: (
@@ -261,7 +273,7 @@ export function JobButton() {
                     'x-decorator': 'FormItem',
                     'x-component': 'DatePicker',
                     'x-component-props': {
-                      showTime: true
+                      showTime: true,
                     },
                     'x-read-pretty': true,
                   },
@@ -274,15 +286,15 @@ export function JobButton() {
                       className: css`
                         padding: 1em;
                         background-color: #eee;
-                      `
+                      `,
                     },
                     'x-read-pretty': true,
-                  }
-                }
-              }
-            }
-          }
-        }
+                  },
+                },
+              },
+            },
+          },
+        },
       }}
     />
   );
@@ -339,7 +351,7 @@ export function NodeDefaultView(props) {
                         return useRequest(() => {
                           return Promise.resolve({ data: d });
                         }, options);
-                      }
+                      },
                     },
                     properties: {
                       title: {
@@ -360,50 +372,50 @@ export function NodeDefaultView(props) {
                             .ant-cascader-picker,
                             .ant-picker,
                             .ant-input-number,
-                            .ant-input-affix-wrapper{
+                            .ant-input-affix-wrapper {
                               width: auto;
                               min-width: 6em;
                             }
-                          `
+                          `,
                         },
-                        properties: instruction.fieldset
+                        properties: instruction.fieldset,
                       },
                       actions: {
                         type: 'void',
                         'x-component': 'Action.Drawer.Footer',
                         properties: workflow.executed
-                        ? {
-                          close: {
-                            title: '{{t("Close")}}',
-                            'x-component': 'Action',
-                            'x-component-props': {
-                              useAction: '{{ cm.useCancelAction }}',
+                          ? {
+                              close: {
+                                title: '{{t("Close")}}',
+                                'x-component': 'Action',
+                                'x-component-props': {
+                                  useAction: '{{ cm.useCancelAction }}',
+                                },
+                              },
+                            }
+                          : {
+                              cancel: {
+                                title: '{{t("Cancel")}}',
+                                'x-component': 'Action',
+                                'x-component-props': {
+                                  useAction: '{{ cm.useCancelAction }}',
+                                },
+                              },
+                              submit: {
+                                title: '{{t("Submit")}}',
+                                'x-component': 'Action',
+                                'x-component-props': {
+                                  type: 'primary',
+                                  useAction: useUpdateAction,
+                                },
+                              },
                             },
-                          }
-                        }
-                        : {
-                          cancel: {
-                            title: '{{t("Cancel")}}',
-                            'x-component': 'Action',
-                            'x-component-props': {
-                              useAction: '{{ cm.useCancelAction }}',
-                            },
-                          },
-                          submit: {
-                            title: '{{t("Submit")}}',
-                            'x-component': 'Action',
-                            'x-component-props': {
-                              type: 'primary',
-                              useAction: useUpdateAction,
-                            },
-                          },
-                        },
-                      } as ISchema
-                    }
-                  }
-                }
-              }
-            }
+                      } as ISchema,
+                    },
+                  },
+                },
+              },
+            },
           }}
         />
       </div>

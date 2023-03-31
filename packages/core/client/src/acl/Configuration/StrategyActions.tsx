@@ -3,7 +3,7 @@ import { connect, useField } from '@formily/react';
 import { Checkbox, Select, Table, Tag } from 'antd';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { useCompile } from '../..';
+import { useCompile } from '@nocobase/client';
 import { useAvailableActions } from './RoleTable';
 
 const toScopes = (value) => {

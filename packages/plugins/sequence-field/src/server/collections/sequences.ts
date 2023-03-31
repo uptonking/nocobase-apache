@@ -15,11 +15,11 @@ export default {
     },
     {
       name: 'current',
-      type: 'bigInt'
+      type: 'bigInt',
     },
     {
       name: 'lastGeneratedAt',
-      type: 'date'
-    }
-  ]
+      type: 'date',
+    },
+  ],
 };

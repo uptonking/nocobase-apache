@@ -90,9 +90,7 @@ describe('test with start', () => {
     let app = mockServer();
     await app.cleanDb();
 
-
     app.plugin(PluginMultiAppManager);
-
 
     await app.loadAndInstall();
     await app.start();

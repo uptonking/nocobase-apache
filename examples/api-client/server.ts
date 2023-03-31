@@ -15,6 +15,7 @@ yarn run:example api-client/api.resource
 import { Application } from '@nocobase/server';
 
 const app = new Application({
+  acl: false,
   database: {
     logging: process.env.DB_LOGGING === 'on' ? console.log : false,
     dialect: process.env.DB_DIALECT as any,

@@ -7,7 +7,7 @@ export const CurrentUserContext = createContext(null);
 
 export const useCurrentUserContext = () => {
   return useContext(CurrentUserContext);
-}
+};
 
 export const CurrentUserProvider = (props) => {
   const location = useLocation();

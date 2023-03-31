@@ -8,7 +8,10 @@ import { useTranslation } from 'react-i18next';
 import { useAPIClient } from '../../../api-client';
 import { createDesignable, useDesignable } from '../../../schema-component';
 import { SchemaInitializer } from '../../../schema-initializer';
-import { useAssociatedFormItemInitializerFields, useFormItemInitializerFields } from '../../../schema-initializer/utils';
+import {
+  useAssociatedFormItemInitializerFields,
+  useFormItemInitializerFields,
+} from '../../../schema-initializer/utils';
 
 const titleCss = css`
   pointer-events: none;
@@ -59,23 +62,28 @@ export const KanbanCardDesigner = (props: any) => {
   const field = useField();
   const fieldSchema = useFieldSchema();
   const fields = useFormItemInitializerFields({ readPretty: true, block: 'Kanban' });
-  const associationFields = useAssociatedFormItemInitializerFields({readPretty: true, block: 'Kanban'});
-  
-  const items: any = [{
-    type: 'itemGroup',
-    title: t('Display fields'),
-    children: fields,
-  }];
-  if (associationFields.length > 0) {
-    items.push({
-      type: 'divider',
-    }, {
+  const associationFields = useAssociatedFormItemInitializerFields({ readPretty: true, block: 'Kanban' });
+
+  const items: any = [
+    {
       type: 'itemGroup',
-      title: t('Display association fields'),
-      children: associationFields,
-    })
+      title: t('Display fields'),
+      children: fields,
+    },
+  ];
+  if (associationFields.length > 0) {
+    items.push(
+      {
+        type: 'divider',
+      },
+      {
+        type: 'itemGroup',
+        title: t('Display association fields'),
+        children: associationFields,
+      },
+    );
   }
-  
+
   if (!designable) {
     return null;
   }
@@ -112,4 +120,3 @@ export const KanbanCardDesigner = (props: any) => {
     </div>
   );
 };
-

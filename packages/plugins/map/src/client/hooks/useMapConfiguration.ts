@@ -1,4 +1,4 @@
-import { useRequest } from "@nocobase/client";
+import { useRequest } from '@nocobase/client';
 
 export const MapConfigurationResourceKey = 'map-configuration';
 
@@ -10,6 +10,4 @@ export const useMapConfiguration = (type: string) => {
       type,
     },
   }).data?.data;
-}
-
-
+};

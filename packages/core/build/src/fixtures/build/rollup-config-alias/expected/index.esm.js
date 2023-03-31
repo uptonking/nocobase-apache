@@ -1,5 +1,5 @@
 var foo = 'a';
-function index () {
+function index() {
   console.log(foo);
 }
 

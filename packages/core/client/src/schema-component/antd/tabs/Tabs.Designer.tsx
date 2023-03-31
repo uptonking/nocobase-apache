@@ -2,7 +2,7 @@ import { ISchema, useField, useFieldSchema } from '@formily/react';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDesignable } from '../..';
-import { GeneralSchemaDesigner, SchemaSettings } from '../../../';
+import { GeneralSchemaDesigner, SchemaSettings } from '@nocobase/client';
 
 export const TabsDesigner = () => {
   const field = useField();

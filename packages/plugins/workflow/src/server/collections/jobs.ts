@@ -5,25 +5,25 @@ export default {
   fields: [
     {
       type: 'belongsTo',
-      name: 'execution'
+      name: 'execution',
     },
     {
       type: 'belongsTo',
       name: 'node',
-      target: 'flow_nodes'
+      target: 'flow_nodes',
     },
     {
       type: 'belongsTo',
       name: 'upstream',
-      target: 'jobs'
+      target: 'jobs',
     },
     {
       type: 'integer',
-      name: 'status'
+      name: 'status',
     },
     {
       type: 'jsonb',
-      name: 'result'
-    }
-  ]
+      name: 'result',
+    },
+  ],
 } as CollectionOptions;

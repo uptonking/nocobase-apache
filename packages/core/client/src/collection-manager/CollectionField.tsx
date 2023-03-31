@@ -3,7 +3,7 @@ import { connect, useField, useFieldSchema } from '@formily/react';
 import { merge } from '@formily/shared';
 import { concat } from 'lodash';
 import React, { useEffect } from 'react';
-import { useActionContext, useCompile, useComponent, useFormBlockContext, useRecord } from '..';
+import { useActionContext, useCompile, useComponent, useFormBlockContext, useRecord } from '@nocobase/client';
 import { CollectionFieldProvider } from './CollectionFieldProvider';
 import { useCollectionField } from './hooks';
 

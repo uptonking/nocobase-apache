@@ -15,17 +15,15 @@ export default {
       title: '',
       'x-decorator': 'FormItem',
       properties: {
-        filter
-      }
-    }
+        filter,
+      },
+    },
   },
-  view: {
-
-  },
+  view: {},
   scope: {
-    useCollectionDataSource
+    useCollectionDataSource,
   },
   components: {
-    VariableComponent
-  }
+    VariableComponent,
+  },
 };

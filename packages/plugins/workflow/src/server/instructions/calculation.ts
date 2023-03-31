@@ -1,6 +1,6 @@
-import { JOB_STATUS } from "../constants";
-import FlowNodeModel from "../models/FlowNode";
-import { calculate } from "../calculators";
+import { JOB_STATUS } from '../constants';
+import FlowNodeModel from '../models/FlowNode';
+import { calculate } from '../calculators';
 
 // @calculation: {
 //   calculator: 'concat',
@@ -34,15 +34,19 @@ export default {
     const { calculation } = node.config || {};
 
     const result = calculation
-      ? calculate({
-        type: '$calculation',
-        options: processor.getParsedValue(calculation)
-      }, prevJob, processor)
+      ? calculate(
+          {
+            type: '$calculation',
+            options: processor.getParsedValue(calculation),
+          },
+          prevJob,
+          processor,
+        )
       : null;
 
     return {
       result,
-      status: JOB_STATUS.RESOLVED
+      status: JOB_STATUS.RESOLVED,
     };
-  }
-}
+  },
+};

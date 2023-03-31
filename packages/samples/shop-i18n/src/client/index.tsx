@@ -3,7 +3,13 @@ import { useHistory } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { Select } from 'antd';
 import { ShopOutlined } from '@ant-design/icons';
-import { i18n, PluginManager, PluginManagerContext, RouteSwitchContext, SettingsCenterProvider } from '@nocobase/client';
+import {
+  i18n,
+  PluginManager,
+  PluginManagerContext,
+  RouteSwitchContext,
+  SettingsCenterProvider,
+} from '@nocobase/client';
 
 const ns = '@nocobase/plugin-sample-shop-i18n';
 
@@ -13,7 +19,7 @@ i18n.addResources('zh-CN', ns, {
   Pending: '已下单',
   Paid: '已支付',
   Delivered: '已发货',
-  Received: '已签收'
+  Received: '已签收',
 });
 
 const ORDER_STATUS_LIST = [
@@ -22,14 +28,14 @@ const ORDER_STATUS_LIST = [
   { value: 1, label: 'Paid' },
   { value: 2, label: 'Delivered' },
   { value: 3, label: 'Received' },
-]
+];
 
 function OrderStatusSelect() {
   const { t } = useTranslation(ns);
 
   return (
     <Select style={{ minWidth: '8em' }}>
-      {ORDER_STATUS_LIST.map(item => (
+      {ORDER_STATUS_LIST.map((item) => (
         <Select.Option value={item.value}>{t(item.label)}</Select.Option>
       ))}
     </Select>

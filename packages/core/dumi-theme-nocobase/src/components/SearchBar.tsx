@@ -48,19 +48,18 @@ export default () => {
         className="__dumi-default-search-input"
         type="search"
         ref={input}
-        {...(Array.isArray(result)
-          ? { value: keywords, onChange: ev => setKeywords(ev.target.value) }
-          : {})}
+        {...(Array.isArray(result) ? { value: keywords, onChange: (ev) => setKeywords(ev.target.value) } : {})}
       />
       <ul>
-        {items.length > 0 && items.map(meta => (
-          <li key={meta.path} onClick={() => setKeywords('')}>
-            <AnchorLink to={meta.path}>
-              {meta.parent?.title && <span>{meta.parent.title}</span>}
-              {highlight(keywords, meta.title)}
-            </AnchorLink>
-          </li>
-        ))}
+        {items.length > 0 &&
+          items.map((meta) => (
+            <li key={meta.path} onClick={() => setKeywords('')}>
+              <AnchorLink to={meta.path}>
+                {meta.parent?.title && <span>{meta.parent.title}</span>}
+                {highlight(keywords, meta.title)}
+              </AnchorLink>
+            </li>
+          ))}
         {items.length === 0 && keywords && <li style={{ textAlign: 'center' }}>{emptySvg}</li>}
       </ul>
     </div>

@@ -1,7 +1,7 @@
 import { Input, PageHeader as AntdPageHeader, Spin } from 'antd';
 import React, { useContext, useState } from 'react';
 import { useHistory, useRouteMatch } from 'react-router-dom';
-import { useAPIClient, useRequest, useSchemaTemplateManager } from '..';
+import { useAPIClient, useRequest, useSchemaTemplateManager } from '@nocobase/client';
 import { RemoteSchemaComponent, SchemaComponentContext } from '../schema-component';
 
 const EditableTitle = (props) => {

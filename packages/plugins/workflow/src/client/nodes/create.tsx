@@ -8,8 +8,6 @@ import CollectionFieldset from '../components/CollectionFieldset';
 import { NAMESPACE } from '../locale';
 import { useOperandContext } from '../calculators';
 
-
-
 export default {
   title: `{{t("Create record", { ns: "${NAMESPACE}" })}}`,
   type: 'create',
@@ -17,7 +15,7 @@ export default {
   fieldset: {
     'config.collection': {
       ...collection,
-      name: 'config.collection'
+      name: 'config.collection',
     },
     // multiple: {
     //   type: 'boolean',
@@ -29,21 +27,19 @@ export default {
     //     disabled: true
     //   }
     // },
-    'config.params.values': values
+    'config.params.values': values,
   },
-  view: {
-
-  },
+  view: {},
   scope: {
-    useCollectionDataSource
+    useCollectionDataSource,
   },
   components: {
-    CollectionFieldset
+    CollectionFieldset,
   },
   getter({ onChange }) {
     const { options } = useOperandContext();
     const { nodes } = useFlowContext();
-    const { config } = nodes.find(n => n.id == options.nodeId);
+    const { config } = nodes.find((n) => n.id == options.nodeId);
     const value = options?.path;
 
     return (
@@ -55,5 +51,5 @@ export default {
         }}
       />
     );
-  }
+  },
 };

@@ -9,8 +9,8 @@
       "url": "http://www.apache.org/licenses/LICENSE-2.0"
     }
   ],
-  "main": "./lib/index.js",
-  "types": "./lib/index.d.ts",
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
   "dependencies": {
     "@nocobase/client": "0.8.1-alpha.4",
     "@nocobase/database": "0.8.1-alpha.4",

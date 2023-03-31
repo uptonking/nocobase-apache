@@ -4,7 +4,7 @@ import { observer, RecursionField, Schema, useField, useFieldSchema } from '@for
 import { uid } from '@formily/shared';
 import cls from 'classnames';
 import React, { createContext, useContext, useEffect, useRef, useState } from 'react';
-import { useDesignable, useFormBlockContext, useSchemaInitializer } from '../../../';
+import { useDesignable, useFormBlockContext, useSchemaInitializer } from '@nocobase/client';
 import { DndContext } from '../../common/dnd-context';
 
 const GridRowContext = createContext<any>({});

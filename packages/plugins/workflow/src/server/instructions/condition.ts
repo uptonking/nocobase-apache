@@ -1,5 +1,5 @@
-import calculators, { calculate, Operand } from "../calculators";
-import { JOB_STATUS } from "../constants";
+import calculators, { calculate, Operand } from '../calculators';
+import { JOB_STATUS } from '../constants';
 
 type BaseCalculation = {
   not?: boolean;
@@ -12,11 +12,11 @@ type SingleCalculation = BaseCalculation & {
 
 type GroupCalculationOptions = {
   type: 'and' | 'or';
-  calculations: Calculation[]
+  calculations: Calculation[];
 };
 
 type GroupCalculation = BaseCalculation & {
-  group: GroupCalculationOptions
+  group: GroupCalculationOptions;
 };
 
 // TODO(type)
@@ -58,9 +58,9 @@ function logicCalculate(calculation, input, processor) {
   let result;
   if (group) {
     const method = group.type === 'and' ? 'every' : 'some';
-    result = group.calculations[method](item => logicCalculate(item, input, processor));
+    result = group.calculations[method]((item) => logicCalculate(item, input, processor));
   } else {
-    const args = calculation.operands.map(operand => calculate(operand, input, processor));
+    const args = calculation.operands.map((operand) => calculate(operand, input, processor));
     const fn = calculators.get(calculation.calculator);
     if (!fn) {
       throw new Error(`no calculator function registered for "${calculation.calculator}"`);
@@ -70,7 +70,6 @@ function logicCalculate(calculation, input, processor) {
 
   return not ? !result : result;
 }
-
 
 export default {
   async run(node, prevJob, processor) {
@@ -83,7 +82,7 @@ export default {
     if (!result && rejectOnFalse) {
       return {
         status: JOB_STATUS.REJECTED,
-        result
+        result,
       };
     }
 
@@ -92,11 +91,10 @@ export default {
       result,
       // TODO(optimize): try unify the building of job
       nodeId: node.id,
-      upstreamId: prevJob && prevJob.id || null
+      upstreamId: (prevJob && prevJob.id) || null,
     };
 
-    const branchNode = processor.nodes
-      .find(item => item.upstream === node && Boolean(item.branchIndex) === result);
+    const branchNode = processor.nodes.find((item) => item.upstream === node && Boolean(item.branchIndex) === result);
 
     if (!branchNode) {
       return job;
@@ -115,5 +113,5 @@ export default {
 
     // pass control to upper scope by ending current scope
     return processor.end(node, branchJob);
-  }
+  },
 };

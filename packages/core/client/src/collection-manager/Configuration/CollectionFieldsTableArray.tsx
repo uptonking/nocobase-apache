@@ -16,7 +16,7 @@ import {
   useCompile,
   SchemaComponent,
   useCollection,
-} from '../..';
+} from '@nocobase/client';
 import { overridingSchema } from '../Configuration/schemas/collectionFields';
 
 const isColumnComponent = (schema: Schema) => {
@@ -193,9 +193,8 @@ export const CollectionFieldsTableArray: React.FC<any> = observer((props) => {
     });
   };
 
-
   const expandedRowRender = (record: CategorizeDataItem, index, indent, expanded) => {
-    if(!props.loading){
+    if (!props.loading) {
       const columns = useTableColumns();
       if (inherits.includes(record.key)) {
         columns.pop();
@@ -245,7 +244,6 @@ export const CollectionFieldsTableArray: React.FC<any> = observer((props) => {
         />
       );
     }
-   
   };
   return (
     <div

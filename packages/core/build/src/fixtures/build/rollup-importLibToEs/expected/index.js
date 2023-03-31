@@ -1,6 +1,6 @@
 'use strict';
 
-function foo () {
+function foo() {
   return 'lib/foo';
 }
 

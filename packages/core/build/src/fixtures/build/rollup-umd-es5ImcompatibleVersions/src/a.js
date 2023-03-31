@@ -1,3 +1,2 @@
-const a = () => {
-}
+const a = () => {};
 export { a };

@@ -16,20 +16,24 @@ export default {
       required: true,
       'x-decorator': 'FormItem',
       'x-component': 'CalculationConfig',
-    }
+    },
   },
-  view: {
-
-  },
+  view: {},
   components: {
     CalculationConfig({ value, onChange }) {
-      return (
-        <Calculation {...value} onChange={onChange} />
-      );
-    }
+      return <Calculation {...value} onChange={onChange} />;
+    },
   },
   getter() {
     const { t } = useWorkflowTranslation();
-    return <div className={css`flex-shrink: 0`}>{t('Calculation result')}</div>;
-  }
+    return (
+      <div
+        className={css`
+          flex-shrink: 0;
+        `}
+      >
+        {t('Calculation result')}
+      </div>
+    );
+  },
 };

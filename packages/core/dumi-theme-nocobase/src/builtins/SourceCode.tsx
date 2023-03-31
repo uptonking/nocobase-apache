@@ -24,12 +24,7 @@ export default ({ code, lang, showCopy = true }: ICodeBlockProps) => {
 
   return (
     <div className="__dumi-default-code-block">
-      <Highlight
-        {...defaultProps}
-        code={code}
-        language={SIMILAR_DSL[lang] || lang}
-        theme={undefined}
-      >
+      <Highlight {...defaultProps} code={code} language={SIMILAR_DSL[lang] || lang} theme={undefined}>
         {({ className, style, tokens, getLineProps, getTokenProps }) => (
           <pre className={className} style={style}>
             {showCopy && (

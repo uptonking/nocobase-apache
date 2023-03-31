@@ -1,7 +1,7 @@
 import { Menu, Select } from 'antd';
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useAPIClient, useCurrentUserContext, useSystemSettings } from '..';
+import { useAPIClient, useCurrentUserContext, useSystemSettings } from '@nocobase/client';
 import locale from '../locale';
 
 export const LanguageSettings = () => {

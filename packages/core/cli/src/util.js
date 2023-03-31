@@ -54,8 +54,10 @@ exports.nodeCheck = () => {
 };
 
 exports.run = (command, argv, options = {}) => {
+  console.log(';; exec ', command, JSON.stringify(argv), JSON.stringify(options));
   return execa(command, argv, {
     shell: true,
+    verbose: true,
     stdio: 'inherit',
     ...options,
     env: {

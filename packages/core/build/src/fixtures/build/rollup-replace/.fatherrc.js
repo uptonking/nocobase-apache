@@ -1,4 +1,3 @@
-
 export default {
   esm: { type: 'rollup' },
   replace: {

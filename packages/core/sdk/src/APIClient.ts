@@ -214,6 +214,7 @@ export class APIClient {
     if (resource) {
       return this.resource(resource, resourceOf)[action](params);
     }
+    // console.log(';; axios.request ', config['url'], config)
     return this.axios.request<T, R, D>(config);
   }
 

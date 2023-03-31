@@ -6,7 +6,7 @@ import get from 'lodash/get';
 import { useTranslation } from 'react-i18next';
 import { useHistory } from 'react-router-dom';
 import { useReactToPrint } from 'react-to-print';
-import { useFormBlockContext, useTableBlockContext } from '../..';
+import { useFormBlockContext, useTableBlockContext } from '@nocobase/client';
 import { useAPIClient } from '../../api-client';
 import { useCollection } from '../../collection-manager';
 import { useRecord } from '../../record-provider';

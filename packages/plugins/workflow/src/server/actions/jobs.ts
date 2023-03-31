@@ -14,7 +14,7 @@ export async function submit(context: Context, next) {
   // NOTE: validate assignee
   instance.set({
     status: values.status,
-    result: values.result
+    result: values.result,
   });
 
   context.status = 202;

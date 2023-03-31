@@ -1,5 +1,5 @@
 var foo = 'bar';
-function index () {
+function index() {
   return foo;
 }
 

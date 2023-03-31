@@ -4,7 +4,7 @@ import { message } from 'antd';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Redirect, useHistory } from 'react-router-dom';
-import { SchemaComponent, useAPIClient, useCurrentDocumentTitle, useSystemSettings } from '..';
+import { SchemaComponent, useAPIClient, useCurrentDocumentTitle, useSystemSettings } from '@nocobase/client';
 import VerificationCode from './VerificationCode';
 
 const signupPageSchema: ISchema = {

@@ -40,17 +40,22 @@ ReadPretty.TextArea = (props) => {
   const { autop = true, ellipsis, text } = props;
   const html = (
     <div
-      style={{lineHeight: 1.612}}
+      style={{ lineHeight: 1.612 }}
       dangerouslySetInnerHTML={{
         __html: HTMLEncode(value).split('\n').join('<br/>'),
       }}
     />
   );
 
-  const content = ellipsis ?
-    (<EllipsisWithTooltip ellipsis={ellipsis} popoverContent={autop ? html : value}>
+  const content = ellipsis ? (
+    <EllipsisWithTooltip ellipsis={ellipsis} popoverContent={autop ? html : value}>
       {text || value}
-    </EllipsisWithTooltip>) : (autop ? html : value);
+    </EllipsisWithTooltip>
+  ) : autop ? (
+    html
+  ) : (
+    value
+  );
   return (
     <div className={cls(prefixCls, props.className)} style={props.style}>
       {props.addonBefore}
@@ -121,9 +126,13 @@ ReadPretty.JSON = (props) => {
   const prefixCls = usePrefixCls('json', props);
   return (
     <pre
-      className={cx(prefixCls, props.className, css`
-        margin-bottom: 0;
-      `)}
+      className={cx(
+        prefixCls,
+        props.className,
+        css`
+          margin-bottom: 0;
+        `,
+      )}
       style={props.style}
     >
       {props.value != null ? JSON.stringify(props.value, null, props.space ?? 2) : ''}

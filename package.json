@@ -1,48 +1,55 @@
 {
   "name": "nocobase",
   "private": true,
+  "license": "Apache-2.0",
   "workspaces": [
     "packages/*/*"
   ],
-  "license": "Apache-2.0",
-  "licenses": [
-    {
-      "type": "Apache-2.0",
-      "url": "http://www.apache.org/licenses/LICENSE-2.0"
-    }
-  ],
   "scripts": {
-    "nocobase": "nocobase",
-    "pm": "nocobase pm",
-    "dev": "nocobase dev",
-    "start": "nocobase start",
     "build": "nocobase build",
-    "test": "nocobase test",
+    "clean": "nocobase clean",
+    "demo": "cross-env PORT=13000 APP_ROOT=packages/app/client PROXY_TARGET_URL=http://127.0.0.1:13001 umi dev",
+    "demo-build": "cross-env PORT=13000 APP_ROOT=packages/app/client PROXY_TARGET_URL=http://127.0.0.1:13001 COMPRESS=none umi build",
+    "demo-server": "cross-env LOGGER_LEVEL=silly ts-node-dev --transpile-only -r dotenv/config -r tsconfig-paths/register ./packages/app/server/src/index.ts start --port=13001",
+    "dev": "nocobase dev",
     "doc": "nocobase doc",
+    "format": "prettier \"**/*.{js,jsx,ts,tsx,json,cjs,mjs}\" --write",
     "postinstall": "nocobase postinstall",
     "lint": "eslint .",
-    "clean": "nocobase clean",
-    "version:alpha": "lerna version prerelease --preid alpha --force-publish=* --no-git-tag-version -m \"chore(versions): publish packages %s\"",
-    "release:force": "lerna publish from-package --yes",
+    "nocobase": "nocobase",
+    "pm": "nocobase pm",
     "release": "lerna publish",
-    "run:example": "ts-node-dev -r dotenv/config -r tsconfig-paths/register ./examples/index.ts"
-  },
-  "resolutions": {
-    "@types/react": "^17.0.0",
-    "@types/react-dom": "^17.0.0"
+    "release:force": "lerna publish from-package --yes",
+    "run:example": "ts-node-dev -r dotenv/config -r tsconfig-paths/register ./examples/index.ts",
+    "start": "nocobase start",
+    "test": "nocobase test",
+    "version:alpha": "lerna version prerelease --preid alpha --force-publish=* --no-git-tag-version -m \"chore(versions): publish packages %s\""
   },
   "config": {
     "ghooks": {
       "commit-msg": "commitlint --edit"
     }
   },
+  "resolutions": {
+    "@types/react": "^17.0.0",
+    "@types/react-dom": "^17.0.0"
+  },
+  "dependencies": {},
   "devDependencies": {
     "@commitlint/cli": "^16.1.0",
     "@commitlint/config-conventional": "^16.0.0",
     "@commitlint/prompt-cli": "^16.1.0",
+    "core-js": "^3.29.0",
     "ghooks": "^2.0.4",
     "prettier": "^2.2.1",
     "pretty-format": "^24.0.0",
-    "pretty-quick": "^3.1.0"
-  }
+    "pretty-quick": "^3.1.0",
+    "sqlite3": "^5.0.8"
+  },
+  "licenses": [
+    {
+      "type": "Apache-2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0"
+    }
+  ]
 }

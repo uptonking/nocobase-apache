@@ -2,8 +2,6 @@ import { Application } from '@nocobase/server';
 import Database from '@nocobase/database';
 import { getApp, sleep } from '..';
 
-
-
 describe.skip('workflow > triggers > schedule', () => {
   let app: Application;
   let db: Database;
@@ -29,8 +27,8 @@ describe.skip('workflow > triggers > schedule', () => {
         enabled: true,
         type: 'schedule',
         config: {
-          mode: 0
-        }
+          mode: 0,
+        },
       });
 
       await sleep(3000);
@@ -42,7 +40,7 @@ describe.skip('workflow > triggers > schedule', () => {
     it('on every 2 seconds', async () => {
       const now = new Date();
       // NOTE: align to even(0, 2, ...) + 0.5 seconds to start
-      await sleep((2.5 - now.getSeconds() % 2) * 1000 - now.getMilliseconds());
+      await sleep((2.5 - (now.getSeconds() % 2)) * 1000 - now.getMilliseconds());
 
       const workflow = await WorkflowModel.create({
         enabled: true,
@@ -51,7 +49,7 @@ describe.skip('workflow > triggers > schedule', () => {
           mode: 0,
           startsOn: now.toISOString(),
           repeat: '*/2 * * * * *',
-        }
+        },
       });
 
       await sleep(4000);
@@ -65,7 +63,7 @@ describe.skip('workflow > triggers > schedule', () => {
     it('on every even seconds and limit 1', async () => {
       const now = new Date();
       // NOTE: align to even(0, 2, ...) + 0.5 seconds to start
-      await sleep((2.5 - now.getSeconds() % 2) * 1000 - now.getMilliseconds());
+      await sleep((2.5 - (now.getSeconds() % 2)) * 1000 - now.getMilliseconds());
 
       const workflow = await WorkflowModel.create({
         enabled: true,
@@ -74,8 +72,8 @@ describe.skip('workflow > triggers > schedule', () => {
           mode: 0,
           startsOn: now.toISOString(),
           repeat: '*/2 * * * * *',
-          limit: 1
-        }
+          limit: 1,
+        },
       });
 
       await sleep(5000);
@@ -87,7 +85,7 @@ describe.skip('workflow > triggers > schedule', () => {
     it('on every 2 seconds after created and limit 1', async () => {
       const now = new Date();
       // NOTE: align to even(0, 2, ...) + 0.5 seconds to start
-      await sleep((2.5 - now.getSeconds() % 2) * 1000 - now.getMilliseconds());
+      await sleep((2.5 - (now.getSeconds() % 2)) * 1000 - now.getMilliseconds());
 
       const workflow = await WorkflowModel.create({
         enabled: true,
@@ -96,8 +94,8 @@ describe.skip('workflow > triggers > schedule', () => {
           mode: 0,
           startsOn: now.toISOString(),
           repeat: 2000,
-          limit: 1
-        }
+          limit: 1,
+        },
       });
 
       await sleep(5000);
@@ -119,7 +117,7 @@ describe.skip('workflow > triggers > schedule', () => {
           mode: 0,
           startsOn,
           repeat: `${now.getSeconds()} * * * * *`,
-        }
+        },
       });
 
       await sleep(5000);
@@ -145,9 +143,9 @@ describe.skip('workflow > triggers > schedule', () => {
               mode: 0,
               startsOn,
               repeat: `${now.getSeconds()} * * * * *`,
-            }
+            },
           },
-          transaction
+          transaction,
         });
       });
 
@@ -160,9 +158,9 @@ describe.skip('workflow > triggers > schedule', () => {
               mode: 0,
               startsOn,
               repeat: `${now.getSeconds()} * * * * *`,
-            }
+            },
           },
-          transaction
+          transaction,
         });
       });
 
@@ -189,15 +187,15 @@ describe.skip('workflow > triggers > schedule', () => {
           collection: 'posts',
           startsOn: {
             field: 'createdAt',
-            offset: 2
-          }
-        }
+            offset: 2,
+          },
+        },
       });
 
       const now = new Date();
-      await sleep((2.5 - now.getSeconds() % 2) * 1000 - now.getMilliseconds());
+      await sleep((2.5 - (now.getSeconds() % 2)) * 1000 - now.getMilliseconds());
 
-      const post = await PostRepo.create({ values: { title: 't1' }});
+      const post = await PostRepo.create({ values: { title: 't1' } });
 
       await sleep(1000);
       const executions = await workflow.getExecutions();
@@ -221,19 +219,19 @@ describe.skip('workflow > triggers > schedule', () => {
           mode: 1,
           collection: 'posts',
           startsOn: {
-            field: 'createdAt'
+            field: 'createdAt',
           },
-          repeat: '*/2 * * * * *'
-        }
+          repeat: '*/2 * * * * *',
+        },
       });
 
       const now = new Date();
-      await sleep((2.5 - now.getSeconds() % 2) * 1000 - now.getMilliseconds());
+      await sleep((2.5 - (now.getSeconds() % 2)) * 1000 - now.getMilliseconds());
       const startTime = new Date();
       startTime.setMilliseconds(500);
       console.log(startTime);
 
-      const post = await PostRepo.create({ values: { title: 't1' }});
+      const post = await PostRepo.create({ values: { title: 't1' } });
 
       await sleep(5000);
       // sleep 1.5s at 2s trigger 1st time
@@ -249,7 +247,7 @@ describe.skip('workflow > triggers > schedule', () => {
 
     it('starts on post.createdAt and repeat with endsOn at certain time', async () => {
       const now = new Date();
-      await sleep((2.5 - now.getSeconds() % 2) * 1000 - now.getMilliseconds());
+      await sleep((2.5 - (now.getSeconds() % 2)) * 1000 - now.getMilliseconds());
       const startTime = new Date();
       startTime.setMilliseconds(500);
 
@@ -260,14 +258,14 @@ describe.skip('workflow > triggers > schedule', () => {
           mode: 1,
           collection: 'posts',
           startsOn: {
-            field: 'createdAt'
+            field: 'createdAt',
           },
           repeat: '*/2 * * * * *',
-          endsOn: new Date(startTime.getTime() + 2500).toISOString()
-        }
+          endsOn: new Date(startTime.getTime() + 2500).toISOString(),
+        },
       });
 
-      const post = await PostRepo.create({ values: { title: 't1' }});
+      const post = await PostRepo.create({ values: { title: 't1' } });
 
       await sleep(5000);
 
@@ -285,22 +283,22 @@ describe.skip('workflow > triggers > schedule', () => {
           mode: 1,
           collection: 'posts',
           startsOn: {
-            field: 'createdAt'
+            field: 'createdAt',
           },
           repeat: '*/2 * * * * *',
           endsOn: {
             field: 'createdAt',
-            offset: 3
-          }
-        }
+            offset: 3,
+          },
+        },
       });
 
       const now = new Date();
-      await sleep((2.5 - now.getSeconds() % 2) * 1000 - now.getMilliseconds());
+      await sleep((2.5 - (now.getSeconds() % 2)) * 1000 - now.getMilliseconds());
       const startTime = new Date();
       startTime.setMilliseconds(500);
 
-      const post = await PostRepo.create({ values: { title: 't1' }});
+      const post = await PostRepo.create({ values: { title: 't1' } });
 
       await sleep(5000);
       const executions = await workflow.getExecutions();
@@ -317,22 +315,22 @@ describe.skip('workflow > triggers > schedule', () => {
           mode: 1,
           collection: 'posts',
           startsOn: {
-            field: 'createdAt'
+            field: 'createdAt',
           },
           repeat: 2000,
           endsOn: {
             field: 'createdAt',
-            offset: 3
-          }
-        }
+            offset: 3,
+          },
+        },
       });
 
       const now = new Date();
-      await sleep((2.5 - now.getSeconds() % 2) * 1000 - now.getMilliseconds());
+      await sleep((2.5 - (now.getSeconds() % 2)) * 1000 - now.getMilliseconds());
       const startTime = new Date();
       startTime.setMilliseconds(500);
 
-      const post = await PostRepo.create({ values: { title: 't1' }});
+      const post = await PostRepo.create({ values: { title: 't1' } });
 
       await sleep(5000);
       const executions = await workflow.getExecutions();

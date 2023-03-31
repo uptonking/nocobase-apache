@@ -69,7 +69,10 @@ function getPackagePaths() {
           const dirname = resolve(process.cwd(), file);
           if (existsSync(dirname)) {
             const re = new RegExp(dir.replace('*', '(.+)'));
-            const p = dirname.substring(process.cwd().length + 1).split(sep).join('/');
+            const p = dirname
+              .substring(process.cwd().length + 1)
+              .split(sep)
+              .join('/');
             const match = re.exec(p);
             pkgs.push([key.replace('*', match?.[1]), dirname]);
           }
@@ -82,10 +85,11 @@ function getPackagePaths() {
   }
   return pkgs;
 }
-
+// 示例 @nocobase/app-client /home/yaoo/Documents/repos/excel/all-lowcode-cms-workflow/nocobase-apache/packages/app/client/src
 function resolveNocobasePackagesAlias(config) {
   const pkgs = getPackagePaths();
   for (const [pkg, dir] of pkgs) {
+    // console.log(';; pkg-dir ', pkg, dir)
     config.module.rules.get('ts-in-node_modules').include.add(dir);
     config.resolve.alias.set(pkg, dir);
   }

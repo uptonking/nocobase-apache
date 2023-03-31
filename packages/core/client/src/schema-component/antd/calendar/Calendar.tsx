@@ -8,7 +8,7 @@ import React, { useCallback, useMemo, useState } from 'react';
 import { Calendar as BigCalendar, momentLocalizer } from 'react-big-calendar';
 import * as dates from 'react-big-calendar/lib/utils/dates';
 import { useTranslation } from 'react-i18next';
-import { RecordProvider } from '../../../';
+import { RecordProvider } from '@nocobase/client';
 import { i18n } from '../../../i18n';
 import { useProps } from '../../hooks/useProps';
 import { ActionContext } from '../action';
@@ -69,7 +69,7 @@ const messages: any = {
   showMore: (count) => i18n.t('{{count}} more items', { count }),
 };
 
-const useEvents = (dataSource: any, fieldNames: any, date: Date, view: typeof Weeks[number]) => {
+const useEvents = (dataSource: any, fieldNames: any, date: Date, view: (typeof Weeks)[number]) => {
   const { t } = useTranslation();
   return useMemo(() => {
     if (!Array.isArray(dataSource)) return [];
@@ -193,7 +193,7 @@ const CalendarRecordViewer = (props) => {
 export const Calendar: any = observer((props: any) => {
   const { dataSource, fieldNames, showLunar } = useProps(props);
   const [date, setDate] = useState<Date>(new Date());
-  const [view, setView] = useState<typeof Weeks[number]>('month');
+  const [view, setView] = useState<(typeof Weeks)[number]>('month');
   const events = useEvents(dataSource, fieldNames, date, view);
   const [visible, setVisible] = useState(false);
   const [record, setRecord] = useState<any>({});

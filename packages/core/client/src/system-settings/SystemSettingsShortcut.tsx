@@ -7,7 +7,7 @@ import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useHistory } from 'react-router-dom';
 import { useSystemSettings } from '.';
-import { i18n, PluginManager, useAPIClient, useRequest } from '..';
+import { i18n, PluginManager, useAPIClient, useRequest } from '@nocobase/client';
 import locale from '../locale';
 import { ActionContext, SchemaComponent, useActionContext } from '../schema-component';
 

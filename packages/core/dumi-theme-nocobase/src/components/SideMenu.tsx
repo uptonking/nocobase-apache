@@ -64,7 +64,7 @@ const SideMenu: FC<INavbarProps> = ({ theme, mobileMenuCollapsed, location, dark
       }
     }
     return [];
-  }
+  };
   const selectKeys = getSelectedKeys(menu);
   const openKeys = selectKeys;
   return (

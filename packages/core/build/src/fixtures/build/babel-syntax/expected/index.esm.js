@@ -2,7 +2,7 @@ import React from 'react';
 
 function _classCallCheck(instance, Constructor) {
   if (!(instance instanceof Constructor)) {
-    throw new TypeError("Cannot call a class as a function");
+    throw new TypeError('Cannot call a class as a function');
   }
 }
 
@@ -42,7 +42,7 @@ function _objectWithoutProperties(source, excluded) {
   return target;
 }
 
-function a () {
+function a() {
   alert('a');
 }
 
@@ -53,30 +53,33 @@ function b2() {
   alert('b2');
 }
 
-var b = /*#__PURE__*/Object.freeze({
+var b = /*#__PURE__*/ Object.freeze({
   __proto__: null,
   b1: b1,
-  b2: b2
+  b2: b2,
 });
 
 var _class;
 // babel-plugin-react-require
 var Foo = function Foo() {
-  return /*#__PURE__*/React.createElement("div", null);
+  return /*#__PURE__*/ React.createElement('div', null);
 }; // Don't support multiple chunks for now
 // @babel/plugin-syntax-dynamic-import
 // import('./a');
 // object-rest-spread
 
 var _bar = bar,
-    foo = _bar.foo,
-    z = _objectWithoutProperties(_bar, ["foo"]);
+  foo = _bar.foo,
+  z = _objectWithoutProperties(_bar, ['foo']);
 
 console.log(z); // @babel/plugin-proposal-decorators + class
 
-var A = foo(_class = function A() {
-  _classCallCheck(this, A);
-}) || _class; // export default from
+var A =
+  foo(
+    (_class = function A() {
+      _classCallCheck(this, A);
+    }),
+  ) || _class; // export default from
 
 var a$1 = x > 10 ? 'big' : 'small';
 console.log(a$1); // export namespace from

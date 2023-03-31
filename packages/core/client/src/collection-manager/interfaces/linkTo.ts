@@ -59,7 +59,7 @@ export const linkTo: IField = {
           selector: cloneDeep(recordPickerSelector),
         };
       }
-      return schema
+      return schema;
     } else {
       if (readPretty) {
         schema['properties'] = {
@@ -68,7 +68,7 @@ export const linkTo: IField = {
       } else {
         schema['properties'] = {
           selector: cloneDeep(recordPickerSelector),
-        }
+        };
       }
     }
   },

@@ -1,10 +1,5 @@
-
 export default {
   esm: { type: 'babel' },
-  extraBabelPresets: [
-    require.resolve('./preset'),
-  ],
-  extraBabelPlugins: [
-    require.resolve('./p2'),
-  ],
+  extraBabelPresets: [require.resolve('./preset')],
+  extraBabelPlugins: [require.resolve('./p2')],
 };

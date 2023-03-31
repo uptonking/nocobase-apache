@@ -1,9 +1,5 @@
-
 export default {
-  entry: [
-    'src/index.js',
-    'src/fetch.js',
-  ],
+  entry: ['src/index.js', 'src/fetch.js'],
   umd: {
     minFile: false,
     name: 'foo',
@@ -15,4 +11,4 @@ export default {
       },
     },
   },
-}
+};

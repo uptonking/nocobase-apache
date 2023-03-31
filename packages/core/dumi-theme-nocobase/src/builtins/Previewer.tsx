@@ -71,7 +71,7 @@ function getSourceType(file: string, source: IPreviewerComponentProps['sources']
   return type as ICodeBlockProps['lang'];
 }
 
-const Previewer: React.FC<IPreviewerProps> = oProps => {
+const Previewer: React.FC<IPreviewerProps> = (oProps) => {
   const demoRef = useRef();
   const { locale } = useContext(context);
   const props = useLocaleProps<IPreviewerProps>(locale, oProps);
@@ -83,20 +83,15 @@ const Previewer: React.FC<IPreviewerProps> = oProps => {
   const openRiddle = useRiddle(props.hideActions?.includes('RIDDLE') ? null : props);
   const [execMotions, isMotionRunning] = useMotions(props.motions || [], demoRef.current);
   const [copyCode, copyStatus] = useCopy();
-  const [currentFile, setCurrentFile] = useState(() =>
-    props.sources._ ? '_' : Object.keys(props.sources)[0],
-  );
-  const [sourceType, setSourceType] = useState(
-    getSourceType(currentFile, props.sources[currentFile]),
-  );
+  const [currentFile, setCurrentFile] = useState(() => (props.sources._ ? '_' : Object.keys(props.sources)[0]));
+  const [sourceType, setSourceType] = useState(getSourceType(currentFile, props.sources[currentFile]));
   const [showSource, setShowSource] = useState(Boolean(props.defaultShowCode));
   const [iframeKey, setIframeKey] = useState(Math.random());
-  const currentFileCode =
-    props.sources[currentFile][sourceType] || props.sources[currentFile].content;
+  const currentFileCode = props.sources[currentFile][sourceType] || props.sources[currentFile].content;
   const playgroundUrl = useTSPlaygroundUrl(locale, currentFileCode);
   const iframeRef = useRef<HTMLIFrameElement>();
   const [color] = usePrefersColor();
-  const { actionBarRender = o => o } = props;
+  const { actionBarRender = (o) => o } = props;
 
   // re-render iframe if prefers color changed
   useEffect(() => {
@@ -111,11 +106,7 @@ const Previewer: React.FC<IPreviewerProps> = oProps => {
   return (
     <div
       style={props.style}
-      className={[
-        props.className,
-        '__dumi-default-previewer',
-        isActive ? '__dumi-default-previewer-target' : '',
-      ]
+      className={[props.className, '__dumi-default-previewer', isActive ? '__dumi-default-previewer-target' : '']
         .filter(Boolean)
         .join(' ')}
       id={props.identifier}
@@ -168,12 +159,7 @@ const Previewer: React.FC<IPreviewerProps> = oProps => {
               />
             )}
             {openRiddle && (
-              <button
-                title="Open demo on Riddle"
-                className="__dumi-default-icon"
-                role="riddle"
-                onClick={openRiddle}
-              />
+              <button title="Open demo on Riddle" className="__dumi-default-icon" role="riddle" onClick={openRiddle} />
             )}
             {props.motions && (
               <button
@@ -194,12 +180,7 @@ const Previewer: React.FC<IPreviewerProps> = oProps => {
             )}
             {!props.hideActions?.includes('EXTERNAL') && (
               <Link target="_blank" to={demoUrl}>
-                <button
-                  title="Open demo in new tab"
-                  className="__dumi-default-icon"
-                  role="open-demo"
-                  type="button"
-                />
+                <button title="Open demo in new tab" className="__dumi-default-icon" role="open-demo" type="button" />
               </Link>
             )}
             <span />
@@ -240,13 +221,9 @@ const Previewer: React.FC<IPreviewerProps> = oProps => {
               defaultActiveKey={currentFile}
               onChange={handleFileChange}
             >
-              {Object.keys(props.sources).map(filename => (
+              {Object.keys(props.sources).map((filename) => (
                 <TabPane
-                  tab={
-                    filename === '_'
-                      ? `index.${getSourceType(filename, props.sources[filename])}`
-                      : filename
-                  }
+                  tab={filename === '_' ? `index.${getSourceType(filename, props.sources[filename])}` : filename}
                   key={filename}
                 />
               ))}

@@ -1,9 +1,9 @@
 import { DndContext as DndKitContext, DragEndEvent, DragOverlay, rectIntersection } from '@dnd-kit/core';
-import { Props } from '@dnd-kit/core/dist/components/DndContext/DndContext';
+import type { Props } from '@dnd-kit/core/dist/components/DndContext/DndContext';
 import { observer } from '@formily/react';
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useAPIClient } from '../../../';
+import { useAPIClient } from '@nocobase/client';
 import { createDesignable, useDesignable } from '../../hooks';
 
 const useDragEnd = (props?: any) => {
@@ -69,7 +69,7 @@ export const DndContext = observer((props: Props) => {
         const { active } = event;
         const activeSchema = active?.data?.current?.schema;
         setVisible(!!activeSchema);
-        if(props?.onDragStart){
+        if (props?.onDragStart) {
           props?.onDragStart?.(event);
         }
       }}

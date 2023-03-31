@@ -4,7 +4,7 @@ import {
   useBlockRequestContext,
   useCollection,
   useCollectionManager,
-  useCompile
+  useCompile,
 } from '@nocobase/client';
 import { saveAs } from 'file-saver';
 import { cloneDeep } from 'lodash';

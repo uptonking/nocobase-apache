@@ -10,7 +10,6 @@ import {
 } from '../utils';
 import { useCompile } from '../../schema-component';
 
-
 // 表单里配置字段
 export const FormItemInitializers = (props: any) => {
   const { t } = useTranslation();
@@ -27,16 +26,17 @@ export const FormItemInitializers = (props: any) => {
   ];
   if (inheritFields?.length > 0) {
     inheritFields.forEach((inherit) => {
-      Object.values(inherit)[0].length&&fieldItems.push(
-        {
-          type: 'divider',
-        },
-        {
-          type: 'itemGroup',
-          title: t(`Parent collection fields`) + '(' + compile(`${Object.keys(inherit)[0]}`) + ')',
-          children: Object.values(inherit)[0],
-        },
-      );
+      Object.values(inherit)[0].length &&
+        fieldItems.push(
+          {
+            type: 'divider',
+          },
+          {
+            type: 'itemGroup',
+            title: t(`Parent collection fields`) + '(' + compile(`${Object.keys(inherit)[0]}`) + ')',
+            children: Object.values(inherit)[0],
+          },
+        );
     });
   }
   associationFields.length > 0 &&

@@ -1,6 +1,5 @@
-
 export default {
   umd: {
-    minFile: false
+    minFile: false,
   },
-}
+};

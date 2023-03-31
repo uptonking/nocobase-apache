@@ -8,14 +8,14 @@ import SideMenu from './components/SideMenu';
 import SlugList from './components/SlugList';
 import './style/layout.less';
 
-const Hero = hero => (
+const Hero = (hero) => (
   <>
     <div className="__dumi-default-layout-hero">
       {hero.image && <img src={hero.image} />}
       <h1>{hero.title}</h1>
       <div dangerouslySetInnerHTML={{ __html: hero.desc }} />
       {hero.actions &&
-        hero.actions.map(action => (
+        hero.actions.map((action) => (
           <Link to={action.link} key={action.text}>
             <button type="button">{action.text}</button>
           </Link>
@@ -24,9 +24,9 @@ const Hero = hero => (
   </>
 );
 
-const Features = features => (
+const Features = (features) => (
   <div className="__dumi-default-layout-features">
-    {features.map(feat => (
+    {features.map((feat) => (
       <dl key={feat.title} style={{ backgroundImage: feat.icon ? `url(${feat.icon})` : undefined }}>
         {feat.link ? (
           <Link to={feat.link}>
@@ -64,11 +64,11 @@ const Layout: React.FC<IRouteComponentProps> = ({ children, location }) => {
     !meta.gapless;
   const isCN = /^zh|cn$/i.test(locale);
   const updatedTimeIns = new Date(meta.updatedTime);
-  const updatedTime: any = `${updatedTimeIns.toLocaleDateString([], { hour12: false })} ${updatedTimeIns.toLocaleTimeString([], { hour12: false })}`;
+  const updatedTime: any = `${updatedTimeIns.toLocaleDateString([], {
+    hour12: false,
+  })} ${updatedTimeIns.toLocaleTimeString([], { hour12: false })}`;
   const repoPlatform =
-    { github: 'GitHub', gitlab: 'GitLab' }[
-      (repoUrl || '').match(/(github|gitlab)/)?.[1] || 'nothing'
-    ] || platform;
+    { github: 'GitHub', gitlab: 'GitLab' }[(repoUrl || '').match(/(github|gitlab)/)?.[1] || 'nothing'] || platform;
 
   return (
     <div
@@ -91,26 +91,21 @@ const Layout: React.FC<IRouteComponentProps> = ({ children, location }) => {
           <Dark
             location={location}
             darkSwitch={darkSwitch}
-            onDarkSwitchClick={ev => {
-              setDarkSwitch(val => !val);
+            onDarkSwitchClick={(ev) => {
+              setDarkSwitch((val) => !val);
               ev.stopPropagation();
             }}
             isSideMenu={false}
           />
         }
-        onMobileMenuClick={ev => {
-          setMenuCollapsed(val => !val);
+        onMobileMenuClick={(ev) => {
+          setMenuCollapsed((val) => !val);
           ev.stopPropagation();
         }}
       />
       <SideMenu
-        theme={darkSwitch ? 'dark' :  'light'}
-        darkPrefix={
-          <Dark
-            darkSwitch={darkSwitch}
-            isSideMenu={true}
-          />
-        }
+        theme={darkSwitch ? 'dark' : 'light'}
+        darkPrefix={<Dark darkSwitch={darkSwitch} isSideMenu={true} />}
         mobileMenuCollapsed={menuCollapsed}
         location={location}
       />
@@ -130,10 +125,7 @@ const Layout: React.FC<IRouteComponentProps> = ({ children, location }) => {
           </div>
         )}
         {(showHero || showFeatures) && meta.footer && (
-          <div
-            className="__dumi-default-layout-footer"
-            dangerouslySetInnerHTML={{ __html: meta.footer }}
-          />
+          <div className="__dumi-default-layout-footer" dangerouslySetInnerHTML={{ __html: meta.footer }} />
         )}
       </div>
     </div>

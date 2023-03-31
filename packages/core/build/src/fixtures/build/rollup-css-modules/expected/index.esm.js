@@ -1,8 +1,10 @@
 function styleInject(css, ref) {
-  if ( ref === void 0 ) ref = {};
+  if (ref === void 0) ref = {};
   var insertAt = ref.insertAt;
 
-  if (!css || typeof document === 'undefined') { return; }
+  if (!css || typeof document === 'undefined') {
+    return;
+  }
 
   var head = document.head || document.getElementsByTagName('head')[0];
   var style = document.createElement('style');
@@ -25,8 +27,8 @@ function styleInject(css, ref) {
   }
 }
 
-var css_248z = "\n.foo_a__3z5g- { color: green; }\n";
-var styles = {"a":"foo_a__3z5g-"};
+var css_248z = '\n.foo_a__3z5g- { color: green; }\n';
+var styles = { a: 'foo_a__3z5g-' };
 styleInject(css_248z);
 
 console.log('foo', styles.a);

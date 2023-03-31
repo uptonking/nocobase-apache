@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { useActionContext, useRecord, useRequest } from '../../../';
+import { useActionContext, useRecord, useRequest } from '@nocobase/client';
 
 export const useRoleResourceValues = (options) => {
   const record = useRecord();

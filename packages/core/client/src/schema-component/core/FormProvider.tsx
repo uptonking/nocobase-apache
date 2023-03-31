@@ -2,7 +2,7 @@ import { createForm } from '@formily/core';
 import {
   FormProvider as FormilyFormProvider,
   SchemaExpressionScopeContext,
-  SchemaOptionsContext
+  SchemaOptionsContext,
 } from '@formily/react';
 import React, { useContext, useMemo } from 'react';
 import { SchemaComponentOptions } from './SchemaComponentOptions';

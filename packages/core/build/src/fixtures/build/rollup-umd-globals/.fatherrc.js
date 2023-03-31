@@ -1,4 +1,3 @@
-
 export default {
   umd: {
     minFile: false,
@@ -6,4 +5,4 @@ export default {
       foo: '$',
     },
   },
-}
+};

@@ -2,7 +2,7 @@
 
 function _classCallCheck(instance, Constructor) {
   if (!(instance instanceof Constructor)) {
-    throw new TypeError("Cannot call a class as a function");
+    throw new TypeError('Cannot call a class as a function');
   }
 }
 
@@ -11,7 +11,7 @@ function _defineProperties(target, props) {
     var descriptor = props[i];
     descriptor.enumerable = descriptor.enumerable || false;
     descriptor.configurable = true;
-    if ("value" in descriptor) descriptor.writable = true;
+    if ('value' in descriptor) descriptor.writable = true;
     Object.defineProperty(target, descriptor.key, descriptor);
   }
 }
@@ -22,17 +22,19 @@ function _createClass(Constructor, protoProps, staticProps) {
   return Constructor;
 }
 
-var A = /*#__PURE__*/function () {
+var A = /*#__PURE__*/ (function () {
   function A() {
     _classCallCheck(this, A);
   }
 
-  _createClass(A, [{
-    key: "foo",
-    value: function foo() {}
-  }]);
+  _createClass(A, [
+    {
+      key: 'foo',
+      value: function foo() {},
+    },
+  ]);
 
   return A;
-}();
+})();
 
 new A().foo();

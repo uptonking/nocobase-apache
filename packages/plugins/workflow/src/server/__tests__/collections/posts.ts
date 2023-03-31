@@ -10,20 +10,20 @@ export default {
     {
       type: 'boolean',
       name: 'published',
-      defaultValue: false
+      defaultValue: false,
     },
     {
       type: 'integer',
       name: 'read',
-      defaultValue: 0
+      defaultValue: 0,
     },
     {
       type: 'hasMany',
-      name: 'comments'
+      name: 'comments',
     },
     {
       type: 'belongsToMany',
-      name: 'tags'
-    }
-  ]
+      name: 'tags',
+    },
+  ],
 } as CollectionOptions;

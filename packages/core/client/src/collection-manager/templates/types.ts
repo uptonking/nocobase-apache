@@ -23,7 +23,6 @@ interface AvailableFieldInterfacesExclude {
   exclude?: any[];
 }
 
-
 interface CollectionOptions {
   /**
    * 自动生成 id

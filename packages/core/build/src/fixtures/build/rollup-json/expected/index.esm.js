@@ -1,6 +1,6 @@
-var foo = "bar";
+var foo = 'bar';
 var pkg = {
-	foo: foo
+  foo: foo,
 };
 
 console.log(pkg);

@@ -10,7 +10,7 @@ import { default as classNames, default as cls } from 'classnames';
 import React, { RefCallback, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { DndContext, useDesignable } from '../..';
-import { RecordIndexProvider, RecordProvider, useSchemaInitializer } from '../../../';
+import { RecordIndexProvider, RecordProvider, useSchemaInitializer } from '@nocobase/client';
 import { useACLFieldWhitelist } from '../../../acl/ACLProvider';
 import { isCollectionFieldComponent, isColumnComponent } from './utils';
 

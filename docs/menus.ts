@@ -244,7 +244,7 @@ export default {
           title: 'SchemaDesigner',
           'title.zh-CN': 'SchemaDesigner',
           'title.TR-TR': 'Şema Tasarımcısı',
-          
+
           type: 'subMenu',
           children: [
             '/api/client/schema-designer/schema-component',

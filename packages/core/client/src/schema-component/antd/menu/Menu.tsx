@@ -12,7 +12,7 @@ import React, { createContext, useContext, useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { useTranslation } from 'react-i18next';
 import { createDesignable, DndContext, SortableItem, useDesignable, useDesigner } from '../..';
-import { Icon, useAPIClient, useSchemaInitializer } from '../../../';
+import { Icon, useAPIClient, useSchemaInitializer } from '@nocobase/client';
 import { useProps } from '../../hooks/useProps';
 import { MenuDesigner } from './Menu.Designer';
 import { findKeysByUid, findMenuItem } from './util';

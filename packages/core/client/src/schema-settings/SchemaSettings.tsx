@@ -22,8 +22,8 @@ import {
   useAPIClient,
   useCollection,
   useCompile,
-  useDesignable
-} from '..';
+  useDesignable,
+} from '@nocobase/client';
 import { useSchemaTemplateManager } from '../schema-templates';
 import { useBlockTemplateContext } from '../schema-templates/BlockTemplate';
 interface SchemaSettingsProps {
@@ -350,7 +350,7 @@ SchemaSettings.Item = (props) => {
   return (
     <Menu.Item
       key={key}
-      eventKey={eventKey as any || key}
+      eventKey={(eventKey as any) || key}
       {...props}
       onClick={(info) => {
         info.domEvent.preventDefault();

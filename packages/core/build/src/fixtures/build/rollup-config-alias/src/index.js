@@ -1,4 +1,3 @@
-
 const foo = 'a';
 
 export default function () {

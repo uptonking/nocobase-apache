@@ -1,15 +1,15 @@
-import React from "react";
-import { Cascader, Input, InputNumber, Select } from "antd";
-import { css } from "@emotion/css";
+import React from 'react';
+import { Cascader, Input, InputNumber, Select } from 'antd';
+import { css } from '@emotion/css';
 
-import { useCompile } from "@nocobase/client";
+import { useCompile } from '@nocobase/client';
 
-import { instructions, useNodeContext } from "./nodes";
-import { useFlowContext } from "./FlowContext";
-import { triggers } from "./triggers";
-import { useTranslation } from "react-i18next";
-import { Registry } from "@nocobase/utils/client";
-import { lang, NAMESPACE, useWorkflowTranslation } from "./locale";
+import { instructions, useNodeContext } from './nodes';
+import { useFlowContext } from './FlowContext';
+import { triggers } from './triggers';
+import { useTranslation } from 'react-i18next';
+import { Registry } from '@nocobase/utils/client';
+import { lang, NAMESPACE, useWorkflowTranslation } from './locale';
 
 function NullRender() {
   return null;
@@ -83,37 +83,37 @@ calculators.register('mod', {
 calculators.register('includes', {
   name: '{{t("contains")}}',
   type: 'boolean',
-  group: 'string'
+  group: 'string',
 });
 calculators.register('notIncludes', {
   name: '{{t("does not contain")}}',
   type: 'boolean',
-  group: 'string'
+  group: 'string',
 });
 calculators.register('startsWith', {
   name: '{{t("starts with")}}',
   type: 'boolean',
-  group: 'string'
+  group: 'string',
 });
 calculators.register('notStartsWith', {
   name: '{{t("not starts with")}}',
   type: 'boolean',
-  group: 'string'
+  group: 'string',
 });
 calculators.register('endsWith', {
   name: '{{t("ends with")}}',
   type: 'boolean',
-  group: 'string'
+  group: 'string',
 });
 calculators.register('notEndsWith', {
   name: '{{t("not ends with")}}',
   type: 'boolean',
-  group: 'string'
+  group: 'string',
 });
 calculators.register('concat', {
   name: `{{t("concat", { ns: "${NAMESPACE}" })}}`,
   type: 'string',
-  group: 'string'
+  group: 'string',
 });
 
 const calculatorGroups = [
@@ -132,11 +132,11 @@ const calculatorGroups = [
   {
     value: 'date',
     title: `{{t("Date", { ns: "${NAMESPACE}" })}}`,
-  }
+  },
 ];
 
 function getGroupCalculators(group) {
-  return Array.from(calculators.getEntities()).filter(([key, value]) => value.group  === group);
+  return Array.from(calculators.getEntities()).filter(([key, value]) => value.group === group);
 }
 
 const JT_VALUE_RE = /^\s*\{\{([\s\S]*)\}\}\s*$/;
@@ -163,14 +163,17 @@ function getType(value) {
   return 'object';
 }
 
-export function parseValue(value: any, Types): {
+export function parseValue(
+  value: any,
+  Types,
+): {
   type: string;
   value?: any;
   options?: any;
 } {
   const valueType = getType(value);
   if (valueType !== 'string') {
-    return { type: 'constant', value, options: { type: valueType } }
+    return { type: 'constant', value, options: { type: valueType } };
   }
 
   const matcher = value.match(JT_VALUE_RE);
@@ -182,7 +185,7 @@ export function parseValue(value: any, Types): {
 
   return {
     type,
-    options: paths.length ? (Types || VariableTypes)[type]?.parse(paths) : {}
+    options: paths.length ? (Types || VariableTypes)[type]?.parse(paths) : {},
   };
 }
 
@@ -199,27 +202,17 @@ const ConstantTypes = {
     title: `{{t("String", { ns: "${NAMESPACE}" })}}`,
     value: 'string',
     component({ onChange, value }) {
-      return (
-        <Input
-          value={value}
-          onChange={ev => onChange(ev.target.value)}
-        />
-      );
+      return <Input value={value} onChange={(ev) => onChange(ev.target.value)} />;
     },
-    default: ''
+    default: '',
   },
   number: {
     title: '{{t("Number")}}',
     value: 'number',
     component({ onChange, value }) {
-      return (
-        <InputNumber
-          value={value}
-          onChange={onChange}
-        />
-      );
+      return <InputNumber value={value} onChange={onChange} />;
     },
-    default: 0
+    default: 0,
   },
   boolean: {
     title: `{{t("Boolean", { ns: "${NAMESPACE}" })}}`,
@@ -227,17 +220,13 @@ const ConstantTypes = {
     component({ onChange, value }) {
       const { t } = useTranslation();
       return (
-        <Select
-          value={value}
-          onChange={onChange}
-          placeholder={t('Select')}
-        >
+        <Select value={value} onChange={onChange} placeholder={t('Select')}>
           <Select.Option value={true}>{lang('True')}</Select.Option>
           <Select.Option value={false}>{lang('False')}</Select.Option>
         </Select>
       );
     },
-    default: false
+    default: false,
   },
   // date: {
   //   title: '日期',
@@ -253,9 +242,9 @@ export const VariableTypes = {
   constant: {
     title: `{{t("Constant", { ns: "${NAMESPACE}" })}}`,
     value: 'constant',
-    options: Object.values(ConstantTypes).map(item => ({
+    options: Object.values(ConstantTypes).map((item) => ({
       value: item.value,
-      label: item.title
+      label: item.title,
     })),
     component(props) {
       const { options = { type: 'string' } } = useOperandContext();
@@ -270,7 +259,7 @@ export const VariableTypes = {
     },
     parse(path) {
       return { path };
-    }
+    },
   },
   $jobsMapByNodeId: {
     title: `{{t("Node result", { ns: "${NAMESPACE}" })}}`,
@@ -284,7 +273,7 @@ export const VariableTypes = {
         if (getter) {
           stack.push({
             value: current.id,
-            label: current.title ?? `#${current.id}`
+            label: current.title ?? `#${current.id}`,
           });
         }
       }
@@ -297,14 +286,14 @@ export const VariableTypes = {
       if (!options?.nodeId) {
         return null;
       }
-      const node = nodes.find(n => n.id == options.nodeId);
+      const node = nodes.find((n) => n.id == options.nodeId);
       if (!node) {
         return null;
       }
       const instruction = instructions.get(node.type);
       return instruction?.getter(props);
     },
-    appendTypeValue({ options = {} }: { type: string, options: any }) {
+    appendTypeValue({ options = {} }: { type: string; options: any }) {
       return options.nodeId ? [Number.parseInt(options.nodeId, 10)] : [];
     },
     onTypeChange([type, nodeId], onChange) {
@@ -315,7 +304,7 @@ export const VariableTypes = {
     },
     stringify(next) {
       return `{{${next.join('.')}}}`;
-    }
+    },
   },
   $context: {
     title: `{{t("Trigger variables", { ns: "${NAMESPACE}" })}}`,
@@ -337,11 +326,11 @@ export const VariableTypes = {
       onChange(`{{${type}.${optionType}}}`);
     },
     parse([type, ...path]) {
-      return { type, ...( path?.length ? { path: path.join('.') } : {}) };
+      return { type, ...(path?.length ? { path: path.join('.') } : {}) };
     },
     stringify(next) {
       return `{{${next.join('.')}}}`;
-    }
+    },
   },
   // calculation: Calculation
 };
@@ -364,11 +353,7 @@ export function useOperandContext() {
   return React.useContext(OperandContext);
 }
 
-export function Operand({
-  value = null,
-  onChange,
-  children
-}: OperandProps) {
+export function Operand({ value = null, onChange, children }: OperandProps) {
   const compile = useCompile();
   const Types = useVariableTypes();
 
@@ -379,11 +364,13 @@ export function Operand({
   const { component: Variable = NullRender, appendTypeValue } = Types[type] || {};
 
   return (
-    <div className={css`
-      display: flex;
-      gap: .5em;
-      align-items: center;
-    `}>
+    <div
+      className={css`
+        display: flex;
+        gap: 0.5em;
+        align-items: center;
+      `}
+    >
       <Cascader
         allowClear={false}
         value={[Types[type] ? type : '', ...(appendTypeValue ? appendTypeValue(operand) : [])]}
@@ -394,7 +381,7 @@ export function Operand({
             value: item.value,
             children: compile(options),
             disabled: options && !options.length,
-            isLeaf: !options
+            isLeaf: !options,
           };
         })}
         onChange={(next: string[]) => {
@@ -427,33 +414,36 @@ export function Calculation({ calculator, operands = [null], onChange }) {
   const compile = useCompile();
   return (
     <VariableTypesContext.Provider value={VariableTypes}>
-      <div className={css`
-        display: flex;
-        gap: .5em;
-        align-items: center;
-      `}>
-        <Operand value={operands[0]} onChange={(v => onChange({ calculator, operands: [v, operands[1]] }))} />
-        {typeof operands[0] !== 'undefined'
-          ? (
-            <>
-              <Select
-                value={calculator}
-                onChange={v => onChange({ operands, calculator: v })}
-                placeholder={t('Calculator')}
-              >
-                {calculatorGroups.filter(group => Boolean(getGroupCalculators(group.value).length)).map(group => (
+      <div
+        className={css`
+          display: flex;
+          gap: 0.5em;
+          align-items: center;
+        `}
+      >
+        <Operand value={operands[0]} onChange={(v) => onChange({ calculator, operands: [v, operands[1]] })} />
+        {typeof operands[0] !== 'undefined' ? (
+          <>
+            <Select
+              value={calculator}
+              onChange={(v) => onChange({ operands, calculator: v })}
+              placeholder={t('Calculator')}
+            >
+              {calculatorGroups
+                .filter((group) => Boolean(getGroupCalculators(group.value).length))
+                .map((group) => (
                   <Select.OptGroup key={group.value} label={compile(group.title)}>
                     {getGroupCalculators(group.value).map(([value, { name }]) => (
-                      <Select.Option key={value} value={value}>{compile(name)}</Select.Option>
+                      <Select.Option key={value} value={value}>
+                        {compile(name)}
+                      </Select.Option>
                     ))}
                   </Select.OptGroup>
                 ))}
-              </Select>
-              <Operand value={operands[1]} onChange={(v => onChange({ calculator, operands: [operands[0], v] }))} />
-            </>
-          )
-          : null
-        }
+            </Select>
+            <Operand value={operands[1]} onChange={(v) => onChange({ calculator, operands: [operands[0], v] })} />
+          </>
+        ) : null}
       </div>
     </VariableTypesContext.Provider>
   );
@@ -465,7 +455,7 @@ export function VariableComponent({ value, onChange, renderSchemaComponent }) {
     constant: {
       title: `{{t("Constant", { ns: "${NAMESPACE}" })}}`,
       value: 'constant',
-    }
+    },
   };
 
   const { type } = parseValue(value, VTypes);

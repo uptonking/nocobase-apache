@@ -1,8 +1,6 @@
 import { Context, utils } from '@nocobase/actions';
 import { EXECUTION_STATUS, JOB_STATUS } from '../../constants';
 
-
-
 export async function submit(context: Context, next) {
   const repository = utils.getRepositoryFromParams(context);
   const { filterByTk, values } = context.action.params;
@@ -18,30 +16,29 @@ export async function submit(context: Context, next) {
     //   userId: currentUser?.id
     // },
     appends: ['job', 'node', 'execution'],
-    context
+    context,
   });
 
   const { actions, assignees } = instance.node.config;
 
   // NOTE: validate status
-  if (instance.status !== JOB_STATUS.PENDING
-    || instance.job.status !== JOB_STATUS.PENDING
-    || instance.execution.status !== EXECUTION_STATUS.STARTED
-    || (actions && !actions[values.status])
+  if (
+    instance.status !== JOB_STATUS.PENDING ||
+    instance.job.status !== JOB_STATUS.PENDING ||
+    instance.execution.status !== EXECUTION_STATUS.STARTED ||
+    (actions && !actions[values.status])
   ) {
     context.throw(400);
   }
 
-  if (!assignees.includes(currentUser.id)
-    || instance.userId !== currentUser.id
-  ) {
+  if (!assignees.includes(currentUser.id) || instance.userId !== currentUser.id) {
     return context.throw(404);
   }
 
   // NOTE: validate assignee
   await instance.update({
     status: values.status,
-    result: values.result
+    result: values.result,
   });
 
   context.body = instance;

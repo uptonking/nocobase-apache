@@ -1,1 +1,1 @@
-declare const b = "foo";
+declare const b = 'foo';

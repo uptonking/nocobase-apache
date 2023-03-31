@@ -9,7 +9,7 @@ import {
   useRecord,
   useRecordIndex,
   useRequest,
-} from '../';
+} from '@nocobase/client';
 import { useAPIClient } from '../api-client';
 
 const collection: CollectionOptions = {

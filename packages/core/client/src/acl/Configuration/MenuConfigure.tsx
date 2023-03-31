@@ -116,8 +116,8 @@ export const MenuConfigure = () => {
                   refresh();
                   message.success(t('Saved successfully'));
                 }}
-              />
-              {' '}{t('Accessible')}
+              />{' '}
+              {t('Accessible')}
             </>
           ),
           render: (_, schema) => {

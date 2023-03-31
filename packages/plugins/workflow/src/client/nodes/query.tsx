@@ -8,8 +8,6 @@ import { collection, filter } from '../schemas/collection';
 import CollectionFieldSelect from '../components/CollectionFieldSelect';
 import { NAMESPACE } from '../locale';
 
-
-
 export default {
   title: `{{t("Query record", { ns: "${NAMESPACE}" })}}`,
   type: 'query',
@@ -23,8 +21,8 @@ export default {
       'x-decorator': 'FormItem',
       'x-component': 'Checkbox',
       'x-component-props': {
-        disabled: true
-      }
+        disabled: true,
+      },
     },
     'config.params': {
       type: 'object',
@@ -32,24 +30,22 @@ export default {
       title: '',
       'x-decorator': 'FormItem',
       properties: {
-        filter
-      }
-    }
+        filter,
+      },
+    },
   },
-  view: {
-
-  },
+  view: {},
   scope: {
-    useCollectionDataSource
+    useCollectionDataSource,
   },
   components: {
-    VariableComponent
+    VariableComponent,
   },
   getter(props) {
     const { onChange } = props;
     const { nodes } = useFlowContext();
     const { options } = useOperandContext();
-    const { config } = nodes.find(n => n.id == options.nodeId);
+    const { config } = nodes.find((n) => n.id == options.nodeId);
     const value = options?.path;
 
     return (
@@ -61,5 +57,5 @@ export default {
         }}
       />
     );
-  }
+  },
 };

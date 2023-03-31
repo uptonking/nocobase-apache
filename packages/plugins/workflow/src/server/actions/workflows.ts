@@ -5,7 +5,7 @@ export async function update(context: Context, next) {
   const repository = utils.getRepositoryFromParams(context) as Repository;
   const { filterByTk, values } = context.action.params;
   // only enable/disable
-  if (Object.keys(values).sort().join() !== 'enabled,key'){
+  if (Object.keys(values).sort().join() !== 'enabled,key') {
     const workflow = await repository.findById(filterByTk);
     if (workflow.get('executed')) {
       return context.throw(400, 'executed workflow can not be updated');
@@ -35,13 +35,13 @@ function migrateConfig(config, oldToNew) {
             ...value,
             options: {
               ...value.options,
-              nodeId: oldToNew.get(value.options?.nodeId)?.id
-            }
+              nodeId: oldToNew.get(value.options?.nodeId)?.id,
+            },
           };
         }
         return Object.keys(value).reduce((result, key) => ({ ...result, [key]: migrate(value[key]) }), {});
       case 'array':
-        return value.map(item => migrate(item));
+        return value.map((item) => migrate(item));
       case 'string':
         const matcher = value.match(/(\{\{\$jobsMapByNodeId\.)([\w-]+)/);
         if (!matcher) {
@@ -66,20 +66,22 @@ export async function revision(context: Context, next) {
   const repository = utils.getRepositoryFromParams(context);
   const { filterByTk, filter = {} } = context.action.params;
 
-  context.body = await db.sequelize.transaction(async transaction => {
+  context.body = await db.sequelize.transaction(async (transaction) => {
     const origin = await repository.findOne({
       filterByTk,
       filter,
       appends: ['nodes'],
       context,
-      transaction
+      transaction,
     });
 
-    const revisionData = filter.key ? {
-      key: filter.key,
-      title: origin.title,
-      allExecuted: origin.allExecuted
-    } : {};
+    const revisionData = filter.key
+      ? {
+          key: filter.key,
+          title: origin.title,
+          allExecuted: origin.allExecuted,
+        }
+      : {};
 
     const instance = await repository.create({
       values: {
@@ -87,9 +89,9 @@ export async function revision(context: Context, next) {
         description: origin.description,
         type: origin.type,
         config: origin.config,
-        ...revisionData
+        ...revisionData,
       },
-      transaction
+      transaction,
     });
 
     const originalNodesMap = new Map();
@@ -100,12 +102,15 @@ export async function revision(context: Context, next) {
     const oldToNew = new Map();
     const newToOld = new Map();
     for await (const node of origin.nodes) {
-      const newNode = await instance.createNode({
-        type: node.type,
-        config: node.config,
-        title: node.title,
-        branchIndex: node.branchIndex
-      }, { transaction });
+      const newNode = await instance.createNode(
+        {
+          type: node.type,
+          config: node.config,
+          title: node.title,
+          branchIndex: node.branchIndex,
+        },
+        { transaction },
+      );
       // NOTE: keep original node references for later replacement
       oldToNew.set(node.id, newNode);
       newToOld.set(newNode.id, node);
@@ -122,11 +127,14 @@ export async function revision(context: Context, next) {
         return context.throw(400, err.message);
       }
 
-      await newNode.update({
-        upstreamId: newUpstream?.id ?? null,
-        downstreamId: newDownstream?.id ?? null,
-        config: migratedConfig
-      }, { transaction });
+      await newNode.update(
+        {
+          upstreamId: newUpstream?.id ?? null,
+          downstreamId: newDownstream?.id ?? null,
+          config: migratedConfig,
+        },
+        { transaction },
+      );
     }
 
     return instance;

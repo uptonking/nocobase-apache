@@ -1,2 +1,2 @@
-import foo from "foo/es/foo";
+import foo from 'foo/es/foo';
 console.log(foo());

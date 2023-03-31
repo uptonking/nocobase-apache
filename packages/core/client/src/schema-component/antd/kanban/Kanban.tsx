@@ -3,7 +3,7 @@ import { observer, RecursionField, useField, useFieldSchema, useForm } from '@fo
 import { Spin, Tag } from 'antd';
 import React, { useContext, useMemo, useState } from 'react';
 import { SchemaComponentOptions } from '../..';
-import { RecordProvider } from '../../../';
+import { RecordProvider } from '@nocobase/client';
 import { useCreateActionProps as useCAP } from '../../../block-provider/hooks';
 import { Board } from '../../../board';
 import '../../../board/style.less';

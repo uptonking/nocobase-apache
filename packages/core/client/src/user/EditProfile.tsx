@@ -9,8 +9,8 @@ import {
   SchemaComponent,
   useActionContext,
   useCurrentUserContext,
-  useRequest
-} from '../';
+  useRequest,
+} from '@nocobase/client';
 import { useAPIClient } from '../api-client';
 
 const useCloseAction = () => {

@@ -4,7 +4,7 @@ import { Options, Result } from 'ahooks/lib/useRequest/src/types';
 import { TablePaginationConfig, TableProps } from 'antd';
 import { cloneDeep } from 'lodash';
 import React, { useMemo } from 'react';
-import { AsyncDataProvider, useAsyncData, useRequest } from '../../../';
+import { AsyncDataProvider, useAsyncData, useRequest } from '@nocobase/client';
 import { useAttach } from '../../hooks';
 import { TableArray } from './Table.Array';
 

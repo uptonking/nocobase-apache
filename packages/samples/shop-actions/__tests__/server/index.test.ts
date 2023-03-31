@@ -26,15 +26,15 @@ describe('shop actions', () => {
         title: 'iPhone 14 Pro',
         price: 7999,
         enabled: true,
-        inventory: 1
-      }
+        inventory: 1,
+      },
     });
     expect(product.data.price).toEqual(7999);
 
     const { body: order } = await agent.resource('orders').create({
       values: {
-        productId: product.data.id
-      }
+        productId: product.data.id,
+      },
     });
     expect(order.data.totalPrice).toEqual(7999);
     expect(order.data.status).toEqual(0);
@@ -43,8 +43,8 @@ describe('shop actions', () => {
       filterByTk: order.data.id,
       values: {
         provider: 'SF',
-        trackingNumber: '123456789'
-      }
+        trackingNumber: '123456789',
+      },
     });
     expect(deliveredOrder.data.status).toBe(2);
     expect(deliveredOrder.data.delivery.trackingNumber).toBe('123456789');

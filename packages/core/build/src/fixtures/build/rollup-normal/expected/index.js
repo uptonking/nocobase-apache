@@ -2,7 +2,7 @@
 
 require('bar');
 
-function foo () {
+function foo() {
   return 'foo';
 }
 

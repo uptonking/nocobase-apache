@@ -7,7 +7,7 @@ import { default as classNames, default as cls } from 'classnames';
 import React, { useState } from 'react';
 import ReactDragListView from 'react-drag-listview';
 import { DndContext } from '../..';
-import { RecordIndexProvider, RecordProvider, useRequest, useSchemaInitializer } from '../../../';
+import { RecordIndexProvider, RecordProvider, useRequest, useSchemaInitializer } from '@nocobase/client';
 
 const isColumnComponent = (schema: Schema) => {
   return schema['x-component']?.endsWith('.Column') > -1;

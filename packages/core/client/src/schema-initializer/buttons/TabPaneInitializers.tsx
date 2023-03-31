@@ -1,6 +1,6 @@
 import { useForm } from '@formily/react';
 import React from 'react';
-import { SchemaComponent, useActionContext, useDesignable, useRecordIndex } from '../..';
+import { SchemaComponent, useActionContext, useDesignable, useRecordIndex } from '@nocobase/client';
 
 export const TabPaneInitializers = (props?: any) => {
   const { designable, insertBeforeEnd } = useDesignable();

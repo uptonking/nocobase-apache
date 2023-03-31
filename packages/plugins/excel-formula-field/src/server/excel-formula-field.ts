@@ -98,7 +98,6 @@ export class ExcelFormulaField extends Field {
     delete opts.dataType;
     return opts;
   }
-
 }
 
 export interface ExcelFormulaFieldOptions extends BaseFieldOptions {

@@ -7,11 +7,7 @@ import './style.less';
 export const RichText = connect(
   (props) => {
     const modules = {
-      toolbar: [
-        ['bold', 'italic', 'underline', 'link'],
-        [{ list: 'ordered' }, { list: 'bullet' }],
-        ['clean'],
-      ],
+      toolbar: [['bold', 'italic', 'underline', 'link'], [{ list: 'ordered' }, { list: 'bullet' }], ['clean']],
     };
     const formats = [
       'header',

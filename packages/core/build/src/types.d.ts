@@ -104,8 +104,8 @@ export interface IBundleOptions {
 export interface IOpts {
   cwd: string;
   watch?: boolean;
-  /** 
-   * 构建时清空outputDir 
+  /**
+   * 构建时清空outputDir
    * @default true
    * */
   clean?: boolean;

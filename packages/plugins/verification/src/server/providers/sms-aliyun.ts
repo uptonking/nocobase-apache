@@ -4,7 +4,6 @@ import { RuntimeOptions } from '@alicloud/tea-util';
 
 import { Provider } from '.';
 
-
 export default class extends Provider {
   client: DysmsApi;
 
@@ -22,7 +21,7 @@ export default class extends Provider {
     // 访问的域名
     config.endpoint = endpoint;
 
-    this.client =  new DysmsApi(config);
+    this.client = new DysmsApi(config);
   }
 
   async send(phoneNumbers, data = {}) {
@@ -30,7 +29,7 @@ export default class extends Provider {
       phoneNumbers,
       signName: this.options.sign,
       templateCode: this.options.template,
-      templateParam: JSON.stringify(data)
+      templateParam: JSON.stringify(data),
     });
 
     try {

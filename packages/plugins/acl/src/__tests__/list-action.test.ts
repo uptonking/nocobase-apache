@@ -74,7 +74,7 @@ describe('list action with acl', () => {
         before: 'acl',
       },
     );
-    
+
     const response = await app.agent().set('X-With-ACL-Meta', true).resource('tests').list({});
 
     const data = response.body;
@@ -241,12 +241,15 @@ describe('list association action with acl', () => {
     });
 
     const userPlugin = app.getPlugin('users');
-    const userAgent = app.agent().set('X-With-ACL-Meta', true).auth(
-      userPlugin.jwtService.sign({
-        userId: user.get('id'),
-      }),
-      { type: 'bearer' },
-    );
+    const userAgent = app
+      .agent()
+      .set('X-With-ACL-Meta', true)
+      .auth(
+        userPlugin.jwtService.sign({
+          userId: user.get('id'),
+        }),
+        { type: 'bearer' },
+      );
 
     await userAgent.resource('posts').create({
       values: {
